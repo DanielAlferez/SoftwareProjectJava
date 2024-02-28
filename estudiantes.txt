@@ -1,0 +1,2 @@
+Daniel,Alferez,1,1600.0,1,Sistemas,10,Calle 5b,1,Meta,1,Villavicencio
+Freinder,Matoma,1,1601.0,1,Sistemas,10,Calle 5b,1,Meta,1,Villavicencio

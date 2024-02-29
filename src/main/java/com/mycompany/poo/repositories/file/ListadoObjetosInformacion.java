@@ -4,6 +4,8 @@
  */
 package com.mycompany.poo.repositories.file;
 
+import com.mycompany.poo.entities.Lugar;
+import com.mycompany.poo.repositories.interfaces.IRepository;
 import com.mycompany.poo.repositories.interfaces.IVisualizarInformacion;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,19 +20,17 @@ import java.util.Scanner;
  *
  * @author Estudiante_MCA
  */
-public class ListadoObjetosInformacion {
+public class ListadoObjetosInformacion implements IRepository<IVisualizarInformacion>  {
     private List<IVisualizarInformacion> lista = new ArrayList<>();
-     
-    public void adicionar(IVisualizarInformacion visualizarInformacion){
-        this.lista.add(visualizarInformacion);
+    private String fileName;
+    
+     public ListadoObjetosInformacion(String fileName) {
+        this.fileName = fileName;
     }
-     
-    public void remover(IVisualizarInformacion visualizarInformacion){
-        this.lista.remove(visualizarInformacion);
-    }
-     
-   public void cargar(String nombreArchivo) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(nombreArchivo))) {
+         
+    @Override
+    public void create(IVisualizarInformacion entity) {
+         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
             for (IVisualizarInformacion objeto : lista) {
                 // Escribir la información del objeto en el archivo
                 writer.println("Nombre de la Clase: " + objeto.nombreClase());
@@ -43,10 +43,16 @@ public class ListadoObjetosInformacion {
             System.err.println("Error al guardar el archivo: " + e.getMessage());
         }
     }
-    
-    public void leer(String nombreArchivo) {
-        try (Scanner scanner = new Scanner(new File(nombreArchivo))) {
-            System.out.println("Contenido del archivo " + nombreArchivo + ":\n");
+
+    @Override
+    public void delete(IVisualizarInformacion entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void read() {
+           try (Scanner scanner = new Scanner(new File(fileName))) {
+            System.out.println("Contenido del archivo " + fileName + ":\n");
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
                 System.out.println(linea);
@@ -56,4 +62,5 @@ public class ListadoObjetosInformacion {
             System.err.println("Error al cargar el archivo: " + e.getMessage());
         }
     }
+    
 }

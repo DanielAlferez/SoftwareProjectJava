@@ -4,10 +4,36 @@
  */
 package com.mycompany.poo.repositories.h2;
 
+import com.mycompany.poo.entities.Departamento;
+import com.mycompany.poo.entities.Municipio;
+import com.mycompany.poo.repositories.interfaces.IRepositoryUpdatable;
+
 /**
  *
  * @author danal
  */
-public class MunicipioRepositoryH2 {
+public class MunicipioRepositoryH2 implements IRepositoryUpdatable<Municipio>{
+
+    @Override
+    public void update(Municipio entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void create(Municipio entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void delete(Municipio entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void read() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+  
     
 }

@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import com.mycompany.poo.repositories.interfaces.IRepository;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 
 
 /**
@@ -57,16 +60,14 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
         return info.toString();
     }
     
-    public void create(Departamento nuevoDepartamento){
-        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
-            for (Departamento departamento : lista) {
-                // Obtener información del municipio y departamento
-                int idDepartamento = departamento.getId_departamento();
-                String nombreDepartamento = departamento.getNombre_departamento();
+    public void create(Departamento nuevoDepartamento) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))) {
+            // Obtener información del nuevo departamento
+            int idDepartamento = nuevoDepartamento.getId_departamento();
+            String nombreDepartamento = nuevoDepartamento.getNombre_departamento();
 
-                // Escribir la información en el archivo
-                writer.println(idDepartamento + "," + nombreDepartamento);
-            }
+            // Escribir la información en el archivo
+            writer.println(idDepartamento + "," + nombreDepartamento);
 
             System.out.println("Guardado exitoso.");
         } catch (IOException e) {
@@ -74,9 +75,37 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
         }
     }
 
+
      
-    public void delete(Departamento departamento){
-        this.lista.remove(departamento);
+    public void delete(Departamento departamentoToRemove) {
+        int idToRemove = departamentoToRemove.getId_departamento();
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                int id = Integer.parseInt(parts[0]);
+
+                if (id != idToRemove) {
+                    lines.add(line);
+                }
+            }
+
+            // Update the list
+            lista.remove(departamentoToRemove);
+
+            // Write back the modified content
+            try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+                for (String updatedLine : lines) {
+                    writer.println(updatedLine);
+                }
+            }
+
+            System.out.println("Departamento eliminado exitosamente.");
+        } catch (IOException e) {
+            System.err.println("Error al actualizar el archivo: " + e.getMessage());
+        }
     }
         
     public void read(){

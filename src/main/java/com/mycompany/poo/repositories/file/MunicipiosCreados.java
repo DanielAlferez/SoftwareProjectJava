@@ -7,8 +7,10 @@ package com.mycompany.poo.repositories.file;
 import com.mycompany.poo.repositories.interfaces.IRepository;
 import com.mycompany.poo.repositories.interfaces.IVisualizarInformacion;
 import com.mycompany.poo.entities.Municipio;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,19 +59,17 @@ public class MunicipiosCreados implements IVisualizarInformacion, IRepository<Mu
     }
     
     public void create(Municipio nuevoMunicipio){
-        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))) {
             lista.add(nuevoMunicipio);  // Agregar el nuevoMunicipio a la lista
 
-            for (Municipio municipio : lista) {
-                // Obtener información del municipio y departamento
-                int idMunicipio = municipio.getId_municipio();
-                String nombreMunicipio = municipio.getNombre_municipio();
-                int idDepartamento = municipio.getDepartamento().getId_departamento();
-                String nombreDepartamento = municipio.getDepartamento().getNombre_departamento();
+            // Obtener información del municipio y departamento
+            int idMunicipio = nuevoMunicipio.getId_municipio();
+            String nombreMunicipio = nuevoMunicipio.getNombre_municipio();
+            int idDepartamento = nuevoMunicipio.getDepartamento().getId_departamento();
+            String nombreDepartamento = nuevoMunicipio.getDepartamento().getNombre_departamento();
 
-                // Escribir la información en el archivo
-                writer.println(idMunicipio + "," + nombreMunicipio + "," + idDepartamento + "," + nombreDepartamento);
-            }
+            // Escribir la información en el archivo
+            writer.println(idMunicipio + "," + nombreMunicipio + "," + idDepartamento + "," + nombreDepartamento);
 
             System.out.println("Guardado exitoso.");
         } catch (IOException e) {
@@ -78,9 +78,37 @@ public class MunicipiosCreados implements IVisualizarInformacion, IRepository<Mu
     }
 
      
-    public void delete(Municipio municipio){
-        this.lista.remove(municipio);
+    public void delete(Municipio municipioToRemove) {
+        int idToRemove = municipioToRemove.getId_municipio();
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                int id = Integer.parseInt(parts[0]);
+
+                if (id != idToRemove) {
+                    lines.add(line);
+                }
+            }
+
+            // Update the list
+            lista.remove(municipioToRemove);
+
+            // Write back the modified content
+            try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+                for (String updatedLine : lines) {
+                    writer.println(updatedLine);
+                }
+            }
+
+            System.out.println("Municipio eliminado exitosamente.");
+        } catch (IOException e) {
+            System.err.println("Error al actualizar el archivo: " + e.getMessage());
+        }
     }
+
      
    
     public void read() {

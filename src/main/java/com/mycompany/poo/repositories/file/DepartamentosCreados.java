@@ -60,6 +60,7 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
         return info.toString();
     }
     
+    @Override
     public void create(Departamento nuevoDepartamento) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))) {
             // Obtener información del nuevo departamento
@@ -77,6 +78,7 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
 
 
      
+    @Override
     public void delete(Departamento departamentoToRemove) {
         int idToRemove = departamentoToRemove.getId_departamento();
         List<String> lines = new ArrayList<>();
@@ -108,6 +110,7 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
         }
     }
         
+    @Override
     public void read(){
         try (Scanner scanner = new Scanner(new File(fileName))) {
             System.out.println("Contenido del archivo " + fileName + ":\n");

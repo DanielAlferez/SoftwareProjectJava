@@ -16,14 +16,13 @@ public class Estudiante {
     private Programa programa;
     private Lugar direccion;
     
-    public Estudiante(String nombre, String apellido, int id_estudiante, double codigo, Programa programa, Lugar direccion) {
+    public Estudiante(int id_estudiante, String nombre, String apellido, double codigo, Programa programa, Lugar direccion) {
+        this.id_estudiante = id_estudiante;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.id_estudiante = id_estudiante;
         this.codigo = codigo;
         this.programa = programa;
         this.direccion = direccion;
-        this.programa = programa;
     }
     
     public String getNombre() {

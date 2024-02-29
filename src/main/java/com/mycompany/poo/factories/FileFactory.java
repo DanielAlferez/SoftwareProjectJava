@@ -18,14 +18,14 @@ import com.mycompany.poo.repositories.interfaces.IRepositoryUpdatable;
 
 import java.sql.Connection;
 
-public class FileFactory implements IRepositoryFactory{
+public class FileFactory {
 
-    @Override
+    
     public IRepository<Departamento> createDepartamentoRepository() {
         return new DepartamentosCreados("Departamentos.txt");
     }
     
-     @Override
+     
     public IRepository<Municipio> createMunicipioRepository() {
         return new MunicipiosCreados("Municipios.txt");
     }

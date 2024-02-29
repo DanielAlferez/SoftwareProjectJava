@@ -57,8 +57,10 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
         return info.toString();
     }
     
+    @Override
     public void create(Departamento nuevoDepartamento){
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+            lista.add(nuevoDepartamento);
             for (Departamento departamento : lista) {
                 // Obtener información del municipio y departamento
                 int idDepartamento = departamento.getId_departamento();
@@ -75,10 +77,12 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
     }
 
      
+    @Override
     public void delete(Departamento departamento){
         this.lista.remove(departamento);
     }
         
+    @Override
     public void read(){
         try (Scanner scanner = new Scanner(new File(fileName))) {
             System.out.println("Contenido del archivo " + fileName + ":\n");

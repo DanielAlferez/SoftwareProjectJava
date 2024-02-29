@@ -18,7 +18,10 @@ import java.sql.SQLException;
  *
  * @author danal
  */
-public interface IRepositoryFactory<T extends IRepository<T>> {
+public interface IRepositoryFactory<T>{
     T createDepartamentoRepository();
     T createMunicipioRepository();
+    T createLugarRepository();
+    T createProgramaRepository();
+    T createEstudianteRepository();
 }

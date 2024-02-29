@@ -11,15 +11,31 @@ import com.mycompany.poo.repositories.interfaces.IRepository;
 
 import java.sql.Connection;
 
-public class FileFactory implements IRepositoryFactory{
+public class FileFactory {
 
-    @Override
+    
     public IRepository<Departamento> createDepartamentoRepository() {
         return new DepartamentosCreados("Departamentos.txt");
     }
     
-     @Override
+     
     public IRepository<Municipio> createMunicipioRepository() {
         return new MunicipiosCreados("Municipios.txt");
     }
+
+    
+    public IRepository createLugarRepository() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
+    public IRepository createProgramaRepository() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
+    public IRepository createEstudianteRepository() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
+

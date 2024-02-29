@@ -54,4 +54,12 @@ public class Programa {
     public void setLugar(Lugar direccion) {
         this.direccion = direccion;
     }
+
+    public int getSemestre() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Object getDireccion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -3,3 +3,13 @@
 1,Villavicencio,1,Meta
 1,Villavicencio,1,Meta
 1,Villavicencio,6,D4
+1,Villavicencio,1,Meta
+1,Villavicencio,1,Meta
+2,Popayan,2,Cauca
+3,Cumaribo,3,Vichada
+1,Villavicencio,1,Meta
+2,Popayan,2,Cauca
+3,Cumaribo,3,Vichada
+1,Villavicencio,1,Meta
+2,Popayan,2,Cauca
+3,Cumaribo,3,Vichada

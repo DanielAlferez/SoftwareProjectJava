@@ -19,11 +19,12 @@ import java.util.logging.Logger;
  */
 
 public class EstudianteRepositoryH2 implements IRepositoryUpdatable<Estudiante> {
-    private final Connection connection;
 
-    @Override
-    public void delete(Estudiante entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    private final Connection connection;
+    
+    public EstudianteRepositoryH2(Connection connection1) {
+        this.connection = connection1;
     }
 
     @Override

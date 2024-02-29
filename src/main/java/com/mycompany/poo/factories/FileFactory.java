@@ -18,7 +18,7 @@ import com.mycompany.poo.repositories.interfaces.IRepositoryUpdatable;
 
 import java.sql.Connection;
 
-public class FileFactory {
+public class FileFactory implements IRepositoryFactory{
 
     
     public IRepository<Departamento> createDepartamentoRepository() {

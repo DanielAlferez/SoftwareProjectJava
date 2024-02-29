@@ -16,52 +16,7 @@ import java.sql.SQLException;
 public class POO {
 
     public static void main(String[] args) throws SQLException, IOException {
-        // Prueba de MunicipiosCreados
-       //IRepositoryFactory dbFactory;
-       //dbFactory = (IRepositoryFactory) new FileFactory();
-        
-       //IRepository<Departamento> departamentoRepository = (IRepository<Departamento>) dbFactory.createDepartamentoRepository();
-       //IRepository<Municipio> municipioRepository = dbFactory.createMunicipioRepository();
-        
-        IRepositoryFactory fileFactory = new FileFactory();
-
-        // Repositorios para Estudiante, Lugar, Departamento y Municipio
-        IRepository<Estudiante> estudianteRepository = (IRepository<Estudiante>) fileFactory.createEstudianteRepository();
-        IRepository<Lugar> lugarRepository = (IRepository<Lugar>) fileFactory.createLugarRepository();
-        IRepository<Departamento> departamentoRepository = (IRepository<Departamento>) fileFactory.createDepartamentoRepository();
-        IRepository<Municipio> municipioRepository = (IRepository<Municipio>) fileFactory.createMunicipioRepository();
-
-        // Crear objetos para probar
-        Departamento meta = new Departamento(1, "Meta");
-        Municipio villavo = new Municipio(1, "Villavicencio", meta);
-        Lugar direccionEstudiante = new Lugar("Calle 123", meta, villavo);
-        Lugar direccionUniversidad = new Lugar("Calle 321", meta, villavo);
-        Programa programa = new Programa(1, "Sistemas", 9, direccionUniversidad);
-        Estudiante estudiante = new Estudiante("Juan", "Perez", 123, 12345, programa, direccionEstudiante);
-
-        // Crear y probar repositorios
-        departamentoRepository.create(meta);
-        municipioRepository.create(villavo);
-        lugarRepository.create(direccionEstudiante);
-        estudianteRepository.create(estudiante);
-
-        // Leer y mostrar información
-        System.out.println("Contenido de DepartamentoRepository:");
-        departamentoRepository.read();
-        System.out.println("Contenido de MunicipioRepository:");
-        municipioRepository.read();
-        System.out.println("Contenido de LugarRepository:");
-        lugarRepository.read();
-        System.out.println("Contenido de EstudianteRepository:");
-        estudianteRepository.read();
-
-        // Eliminar objetos y probar de nuevo
-        estudianteRepository.delete(estudiante);
-
-        System.out.println("Contenido de EstudianteRepository después de eliminar:");
-        estudianteRepository.read();
-        //DATA BASE H2
-        
+           
         Departamento D1 =  new Departamento(1, "Meta");
         Departamento D2 =  new Departamento(2, "Cauca");
         Departamento D3 =  new Departamento(3, "Vichada");
@@ -84,31 +39,53 @@ public class POO {
         
         IRepositoryFactory dbFactoryh2;
         dbFactoryh2 = new H2Factory();
-        
-         //Departamento
+        IRepositoryFactory fileFactory;
+        fileFactory = new FileFactory();
+
+        //Departamento
          
         IRepositoryUpdatable<Departamento> departamentoRepositoryh2 = (IRepositoryUpdatable<Departamento>) dbFactoryh2.createDepartamentoRepository();
+        IRepository<Departamento> departamentoRepository = (IRepository<Departamento>) fileFactory.createDepartamentoRepository();
+
         departamentoRepositoryh2.create(D1);
         departamentoRepositoryh2.create(D2);
         departamentoRepositoryh2.create(D3);
         departamentoRepositoryh2.read();
         
+        departamentoRepository.create(D1);
+        departamentoRepository.create(D2);
+        departamentoRepository.create(D3);
+        departamentoRepository.read();
+        
         
         //Municipio
         
         IRepositoryUpdatable<Municipio> municipioRepositoryh2 = (IRepositoryUpdatable<Municipio>) dbFactoryh2.createMunicipioRepository();
+        IRepository<Municipio> municipioRepository = (IRepository<Municipio>) fileFactory.createMunicipioRepository();
+        
         municipioRepositoryh2.create(M1);
         municipioRepositoryh2.create(M2);
         municipioRepositoryh2.create(M3);
         municipioRepositoryh2.read();
         
+        municipioRepository.create(M1);
+        municipioRepository.create(M2);
+        municipioRepository.create(M3);
+        municipioRepository.read();
+        
         //Lugar
         
          IRepositoryUpdatable<Lugar> lugarRepositoryh2 = (IRepositoryUpdatable<Lugar>) dbFactoryh2.createLugarRepository();
+         IRepository<Lugar> lugarRepository = (IRepository<Lugar>) fileFactory.createLugarRepository();
          lugarRepositoryh2.create(L1);
          lugarRepositoryh2.create(L2);
          lugarRepositoryh2.create(L3);
          lugarRepositoryh2.read();
+         
+         lugarRepository.create(L1);
+         lugarRepository.create(L2);
+         lugarRepository.create(L3);
+         lugarRepository.read();
          
          //Programa
          
@@ -121,9 +98,16 @@ public class POO {
          //Estudiante
          
          IRepositoryUpdatable<Estudiante> estudianteRepositoryh2 = (IRepositoryUpdatable<Estudiante>) dbFactoryh2.createEstudianteRepository();
+         IRepository<Estudiante> estudianteRepository = (IRepository<Estudiante>) fileFactory.createEstudianteRepository();
+         
          estudianteRepositoryh2.create(E1);
          estudianteRepositoryh2.create(E2);
          estudianteRepositoryh2.create(E3);
          estudianteRepositoryh2.read();
+         
+         estudianteRepository.create(E1);
+         estudianteRepository.create(E2);
+         estudianteRepository.create(E3);
+         estudianteRepository.read();
     }
 }

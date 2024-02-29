@@ -41,7 +41,7 @@ public class H2Factory implements IRepositoryFactory{
         }
     }
     
-     private void ejecutarScriptSQL() throws SQLException {
+    private void ejecutarScriptSQL() throws SQLException {
         Connection connection = ConnectionDatabase.getConnection();
         try (Statement statement = connection.createStatement()) {
             // Script SQL para crear las tablas
@@ -55,7 +55,7 @@ public class H2Factory implements IRepositoryFactory{
                     "id_municipio INT PRIMARY KEY, " +
                     "nombre_municipio VARCHAR(255), " +
                     "departamento_id INT, " +
-                    "FOREIGN KEY (departamento_id) REFERENCES Departamento(id_departamento)" +
+                    "FOREIGN KEY (departamento_id) REFERENCES Departamento(id_departamento) ON DELETE CASCADE" +
                   ")";
             statement.executeUpdate(sql);
 
@@ -63,8 +63,8 @@ public class H2Factory implements IRepositoryFactory{
                     "direccion VARCHAR(255) PRIMARY KEY, " +
                     "departamento_id INT, " +
                     "municipio_id INT, " +
-                    "FOREIGN KEY (departamento_id) REFERENCES Departamento(id_departamento), " +
-                    "FOREIGN KEY (municipio_id) REFERENCES Municipio(id_municipio)" +
+                    "FOREIGN KEY (departamento_id) REFERENCES Departamento(id_departamento) ON DELETE CASCADE, " +
+                    "FOREIGN KEY (municipio_id) REFERENCES Municipio(id_municipio) ON DELETE CASCADE" +
                   ")";
             statement.executeUpdate(sql);
 
@@ -73,7 +73,7 @@ public class H2Factory implements IRepositoryFactory{
                     "nombre VARCHAR(255), " +
                     "semestre INT, " +
                     "direccion VARCHAR(255), " +
-                    "FOREIGN KEY (direccion) REFERENCES Lugar(direccion)" +
+                    "FOREIGN KEY (direccion) REFERENCES Lugar(direccion) ON DELETE CASCADE" +
                   ")";
             statement.executeUpdate(sql);
 
@@ -84,8 +84,8 @@ public class H2Factory implements IRepositoryFactory{
                     "codigo DOUBLE, " +
                     "programa_id INT, " +
                     "direccion VARCHAR(255), " +
-                    "FOREIGN KEY (programa_id) REFERENCES Programa(id_programa), " +
-                    "FOREIGN KEY (direccion) REFERENCES Lugar(direccion)" +
+                    "FOREIGN KEY (programa_id) REFERENCES Programa(id_programa) ON DELETE CASCADE, " +
+                    "FOREIGN KEY (direccion) REFERENCES Lugar(direccion) ON DELETE CASCADE" +
                   ")";
             statement.executeUpdate(sql);
         }

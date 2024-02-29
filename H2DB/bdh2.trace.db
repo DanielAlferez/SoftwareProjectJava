@@ -398,3 +398,168 @@ DROP TABLE MUNICIPIO [90107-224]
 	at org.h2.server.web.WebThread.process(WebThread.java:190)
 	at org.h2.server.web.WebThread.run(WebThread.java:103)
 	at java.base/java.lang.Thread.run(Thread.java:832)
+2024-02-28 23:30:49.527951-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-02-28 23:30:49.656110-05:00 jdbc[8]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:218)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:135)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
+	at com.mycompany.poo.factories.ConnectionDatabase.getConnection(ConnectionDatabase.java:22)
+	at com.mycompany.poo.factories.H2Factory.createEstudianteRepository(H2Factory.java:146)
+	at com.mycompany.poo.factories.H2Factory.createEstudianteRepository(H2Factory.java:34)
+	at com.mycompany.poo.POO.main(POO.java:87)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 12 more
+2024-02-28 23:31:05.769024-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-02-28 23:31:05.878588-05:00 jdbc[8]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:218)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:135)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
+	at com.mycompany.poo.factories.ConnectionDatabase.getConnection(ConnectionDatabase.java:22)
+	at com.mycompany.poo.factories.H2Factory.createEstudianteRepository(H2Factory.java:146)
+	at com.mycompany.poo.factories.H2Factory.createEstudianteRepository(H2Factory.java:34)
+	at com.mycompany.poo.POO.main(POO.java:87)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 12 more
+2024-02-28 23:31:54.777382-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-02-28 23:31:54.842858-05:00 jdbc[6]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:218)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:135)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
+	at com.mycompany.poo.factories.ConnectionDatabase.getConnection(ConnectionDatabase.java:22)
+	at com.mycompany.poo.factories.H2Factory.createLugarRepository(H2Factory.java:122)
+	at com.mycompany.poo.factories.H2Factory.createLugarRepository(H2Factory.java:34)
+	at com.mycompany.poo.POO.main(POO.java:107)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 12 more
+2024-02-28 23:40:01.817981-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-02-28 23:40:02.286094-05:00 jdbc[7]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:218)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:135)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
+	at com.mycompany.poo.factories.ConnectionDatabase.getConnection(ConnectionDatabase.java:22)
+	at com.mycompany.poo.factories.H2Factory.createProgramaRepository(H2Factory.java:134)
+	at com.mycompany.poo.factories.H2Factory.createProgramaRepository(H2Factory.java:34)
+	at com.mycompany.poo.POO.main(POO.java:94)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 12 more
+2024-02-28 23:41:57.356240-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-02-28 23:41:57.567680-05:00 jdbc[5]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:218)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:135)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
+	at com.mycompany.poo.factories.ConnectionDatabase.getConnection(ConnectionDatabase.java:22)
+	at com.mycompany.poo.factories.H2Factory.createMunicipioRepository(H2Factory.java:110)
+	at com.mycompany.poo.factories.H2Factory.createMunicipioRepository(H2Factory.java:34)
+	at com.mycompany.poo.POO.main(POO.java:65)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 12 more
+2024-02-28 23:44:26.990633-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-02-28 23:44:27.521959-05:00 jdbc[7]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:218)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:135)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
+	at com.mycompany.poo.factories.ConnectionDatabase.getConnection(ConnectionDatabase.java:22)
+	at com.mycompany.poo.factories.H2Factory.createProgramaRepository(H2Factory.java:134)
+	at com.mycompany.poo.factories.H2Factory.createProgramaRepository(H2Factory.java:34)
+	at com.mycompany.poo.POO.main(POO.java:92)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 12 more
+2024-02-28 23:46:16.242172-05:00 jdbc[3]: null
+org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:218)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:135)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:288)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:811)
+	at org.h2.server.web.WebApp.login(WebApp.java:1039)
+	at org.h2.server.web.WebApp.process(WebApp.java:227)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:177)
+	at org.h2.server.web.WebThread.process(WebThread.java:154)
+	at org.h2.server.web.WebThread.run(WebThread.java:103)
+	at java.base/java.lang.Thread.run(Thread.java:1623)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
+The connection was not closed by the application and is garbage collected [90018-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 13 more

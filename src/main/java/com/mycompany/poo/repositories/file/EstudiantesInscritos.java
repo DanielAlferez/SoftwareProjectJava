@@ -11,8 +11,11 @@ import com.mycompany.poo.entities.Programa;
 import com.mycompany.poo.entities.Municipio;
 import com.mycompany.poo.entities.Lugar;
 import com.mycompany.poo.entities.Estudiante;
+import com.mycompany.poo.repositories.interfaces.IRepository;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +29,13 @@ import java.lang.reflect.Method;
  *
  * @author Estudiante_MCA
  */
-public class EstudiantesInscritos implements IVisualizarInformacion {
+public class EstudiantesInscritos implements IVisualizarInformacion, IRepository<Estudiante> {
     private List<Estudiante> listado = new ArrayList<>();
+    private String fileName;
+    
+     public EstudiantesInscritos(String fileName) {
+        this.fileName = fileName;
+    }
     
     @Override
     public String nombreClase() {
@@ -54,54 +62,79 @@ public class EstudiantesInscritos implements IVisualizarInformacion {
 
         return info.toString();
     }
-    
-    public void adicionar(Estudiante estudiante){
-        this.listado.add(estudiante);
-    }
-     
-    public void remover(Estudiante estudiante){
-        this.listado.remove(estudiante);
-    }
 
-    public void cargar(String nombreArchivo) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(nombreArchivo))) {
-            for (Estudiante estudiante : listado) {
-                // Obtener información del estudiante, programa y dirección
-                String nombre = estudiante.getNombre();
-                String apellido = estudiante.getApellido();
-                int idEstudiante = (int) estudiante.getId();
-                double codigo = estudiante.getCodigo();
-                
-                Programa programa = estudiante.getPrograma();
-                int idPrograma = programa.getId_programa();
-                String nombrePrograma = programa.getNombre();
-                int semestrePrograma = programa.getSemestres();
-                
-                Lugar direccion = estudiante.getDireccion();
-                String direccionLugar = direccion.getDireccion();
-                Departamento departamento = direccion.getDepartamento();
-                int idDepartamento = departamento.getId_departamento();
-                String nombreDepartamento = departamento.getNombre_departamento();
-                Municipio municipio = direccion.getMunicipio();
-                int idMunicipio = municipio.getId_municipio();
-                String nombreMunicipio = municipio.getNombre_municipio();
+    @Override
+    public void create(Estudiante nuevoEstudiante) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))) {
+            // Obtener información del estudiante, programa y dirección
+            String nombre = nuevoEstudiante.getNombre();
+            String apellido = nuevoEstudiante.getApellido();
+            int idEstudiante = (int) nuevoEstudiante.getId();
+            double codigo = nuevoEstudiante.getCodigo();
 
-                // Escribir la información en el archivo
-                writer.println(nombre + "," + apellido + "," + idEstudiante + "," + codigo + "," +
-                        idPrograma + "," + nombrePrograma + "," + semestrePrograma + "," +
-                        direccionLugar + "," + idDepartamento + "," + nombreDepartamento + "," +
-                        idMunicipio + "," + nombreMunicipio);
-            }
+            Programa programa = nuevoEstudiante.getPrograma();
+            int idPrograma = programa.getId_programa();
+            String nombrePrograma = programa.getNombre();
+            int semestrePrograma = programa.getSemestres();
+
+            Lugar direccion = nuevoEstudiante.getDireccion();
+            String direccionLugar = direccion.getDireccion();
+            Departamento departamento = direccion.getDepartamento();
+            int idDepartamento = departamento.getId_departamento();
+            String nombreDepartamento = departamento.getNombre_departamento();
+            Municipio municipio = direccion.getMunicipio();
+            int idMunicipio = municipio.getId_municipio();
+            String nombreMunicipio = municipio.getNombre_municipio();
+
+            // Escribir la información en el archivo
+            writer.println(nombre + "," + apellido + "," + idEstudiante + "," + codigo + "," +
+                    idPrograma + "," + nombrePrograma + "," + semestrePrograma + "," +
+                    direccionLugar + "," + idDepartamento + "," + nombreDepartamento + "," +
+                    idMunicipio + "," + nombreMunicipio);
 
             System.out.println("Guardado exitoso.");
         } catch (IOException e) {
             System.err.println("Error al guardar el archivo: " + e.getMessage());
         }
     }
-    
-    public void leer(String nombreArchivo) {
-        try (Scanner scanner = new Scanner(new File(nombreArchivo))) {
-            System.out.println("Contenido del archivo " + nombreArchivo + ":\n");
+
+    @Override
+    public void delete(Estudiante estudianteToRemove) {
+        int idToRemove = (int) estudianteToRemove.getId();
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Assuming the format is "nombre,apellido,idEstudiante,codigo,idPrograma,nombrePrograma,semestrePrograma,direccionLugar,idDepartamento,nombreDepartamento,idMunicipio,nombreMunicipio"
+                String[] parts = line.split(",");
+                int idEstudiante = Integer.parseInt(parts[2].trim());
+
+                if (idEstudiante != idToRemove) {
+                    lines.add(line);
+                }
+            }
+
+            // Update the list
+            listado.remove(estudianteToRemove);
+
+            // Write back the modified content
+            try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+                for (String updatedLine : lines) {
+                    writer.println(updatedLine);
+                }
+            }
+
+            System.out.println("Estudiante eliminado exitosamente.");
+        } catch (IOException e) {
+            System.err.println("Error al actualizar el archivo: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void read() {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            System.out.println("Contenido del archivo " + fileName + ":\n");
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
                 System.out.println(linea);
@@ -111,4 +144,5 @@ public class EstudiantesInscritos implements IVisualizarInformacion {
             System.err.println("Error al cargar el archivo: " + e.getMessage());
         }
     }
+
 }

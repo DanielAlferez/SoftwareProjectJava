@@ -65,6 +65,7 @@ public class MunicipioRepositoryH2 implements IRepositoryUpdatable<Municipio>{
 
     @Override
     public void read() {
+
         String sql = "SELECT * FROM municipio";
         try (PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {

@@ -9,6 +9,7 @@ import com.mycompany.poo.entities.Estudiante;
 import com.mycompany.poo.entities.Lugar;
 import com.mycompany.poo.entities.Municipio;
 import com.mycompany.poo.entities.Programa;
+import com.mycompany.poo.repositories.file.DepartamentosCreados;
 import com.mycompany.poo.repositories.h2.DepartamentoRepositoryH2;
 import com.mycompany.poo.repositories.h2.EstudianteRepositoryH2;
 import com.mycompany.poo.repositories.h2.LugarRepositoryH2;

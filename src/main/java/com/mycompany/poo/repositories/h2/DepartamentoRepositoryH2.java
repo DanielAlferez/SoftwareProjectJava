@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.poo.repositories.h2;
 
 import com.mycompany.poo.entities.Departamento;
@@ -14,11 +10,20 @@ import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author danal
- */
-public class DepartamentoRepositoryH2 implements IRepositoryUpdatable<Departamento>{
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class DepartamentoRepositoryH2 implements IRepositoryUpdatable<Departamento> {
+
+
+    public DepartamentoRepositoryH2() {
+    }
 
     private Connection connection;
 

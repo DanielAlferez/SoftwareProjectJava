@@ -18,6 +18,7 @@ import java.sql.SQLException;
  *
  * @author danal
  */
+
 public interface IRepositoryFactory<T>{
     T createDepartamentoRepository();
     T createMunicipioRepository();

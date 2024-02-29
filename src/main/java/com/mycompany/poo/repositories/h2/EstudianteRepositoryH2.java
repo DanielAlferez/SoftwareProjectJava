@@ -17,11 +17,13 @@ import java.util.logging.Logger;
  *
  * @author danal
  */
+
 public class EstudianteRepositoryH2 implements IRepositoryUpdatable<Estudiante> {
     private final Connection connection;
 
-    public EstudianteRepositoryH2(Connection connection) {
-        this.connection = connection;
+    @Override
+    public void delete(Estudiante entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override

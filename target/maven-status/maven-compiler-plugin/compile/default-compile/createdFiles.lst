@@ -1,0 +1,5 @@
+com\mycompany\poo\factories\FileFactory.class
+com\mycompany\poo\POO.class
+com\mycompany\poo\factories\IRepositoryFactory.class
+com\mycompany\poo\factories\H2Factory.class
+com\mycompany\poo\repositories\interfaces\IRepositoryUpdatable.class

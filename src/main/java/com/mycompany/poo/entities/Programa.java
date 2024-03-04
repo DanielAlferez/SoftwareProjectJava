@@ -39,12 +39,12 @@ public class Programa {
         this.nombre = nombre;
     }
 
-    public int getSemestres() {
+    public int getSemestre() {
         return semestre;
     }
 
-    public void setSemestres(int semestres) {
-        this.semestre = semestres;
+    public void setSemestre(int semestre) {
+        this.semestre = semestre;
     }
 
     public Lugar getLugar() {
@@ -53,13 +53,5 @@ public class Programa {
 
     public void setLugar(Lugar direccion) {
         this.direccion = direccion;
-    }
-
-    public int getSemestre() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Object getDireccion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

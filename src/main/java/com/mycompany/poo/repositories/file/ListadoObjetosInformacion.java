@@ -4,7 +4,6 @@
  */
 package com.mycompany.poo.repositories.file;
 
-import com.mycompany.poo.entities.Lugar;
 import com.mycompany.poo.repositories.interfaces.IRepository;
 import com.mycompany.poo.repositories.interfaces.IVisualizarInformacion;
 import java.io.File;
@@ -21,10 +20,14 @@ import java.util.Scanner;
  * @author Estudiante_MCA
  */
 public class ListadoObjetosInformacion implements IRepository<IVisualizarInformacion>  {
-    private List<IVisualizarInformacion> lista = new ArrayList<>();
-    private String fileName;
+    private final List<IVisualizarInformacion> lista = new ArrayList<>();
+    private final String fileName;
     
-     public ListadoObjetosInformacion(String fileName) {
+    /**
+     *
+     * @param fileName
+     */
+    public ListadoObjetosInformacion(String fileName) {
         this.fileName = fileName;
     }
          

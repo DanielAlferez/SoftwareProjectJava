@@ -4,44 +4,43 @@
  */
 package com.mycompany.poo.repositories.file;
 
+import com.mycompany.poo.repositories.interfaces.IRepository;
 import com.mycompany.poo.repositories.interfaces.IVisualizarInformacion;
-import com.mycompany.poo.entities.Departamento;
+import com.mycompany.poo.entities.Programa;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
-import java.util.Scanner;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import com.mycompany.poo.repositories.interfaces.IRepository;
-import java.io.BufferedReader;
-import java.io.FileReader;
-
 
 /**
  *
  * @author Estudiante_MCA
  */
-public class DepartamentosCreados implements IVisualizarInformacion, IRepository<Departamento> {
-    private final List<Departamento> lista = new ArrayList<>();
+public class ProgramasCreados implements IVisualizarInformacion, IRepository<Programa>{
+    private final List<Programa> lista = new ArrayList<>();
     private final String fileName;
     
-     public DepartamentosCreados(String fileName) {
-        this.fileName = fileName;
+    public ProgramasCreados(String nombreArchivo) {
+        this.fileName = nombreArchivo;
     }
     
     @Override
     public String nombreClase() {
-       return getClass().getSimpleName();
+        return getClass().getSimpleName();
     }
 
     @Override
     public String informacionObjeto() {
         StringBuilder info = new StringBuilder();
-        
+
         // Obtener información sobre los atributos
         Field[] campos = getClass().getDeclaredFields();
         info.append("Atributos:\n");
@@ -60,14 +59,18 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
     }
     
     @Override
-    public void create(Departamento nuevoDepartamento) {
+    public void create(Programa nuevoPrograma) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))) {
-            // Obtener información del nuevo departamento
-            int idDepartamento = nuevoDepartamento.getId_departamento();
-            String nombreDepartamento = nuevoDepartamento.getNombre_departamento();
+            lista.add(nuevoPrograma);  // Agregar el nuevoPrograma a la lista
+
+            // Obtener información del programa y lugar
+            int id = nuevoPrograma.getId_programa();
+            String nombrePrograma = nuevoPrograma.getNombre();
+            int semestre = nuevoPrograma.getSemestre();
+            String direccion = nuevoPrograma.getLugar().getDireccion();
 
             // Escribir la información en el archivo
-            writer.println(idDepartamento + "," + nombreDepartamento);
+            writer.println(id + "," + nombrePrograma + "," + semestre + "," + direccion);
 
             System.out.println("Guardado exitoso.");
         } catch (IOException e) {
@@ -75,11 +78,10 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
         }
     }
 
-
      
     @Override
-    public void delete(Departamento departamentoToRemove) {
-        int idToRemove = departamentoToRemove.getId_departamento();
+    public void delete(Programa programaToRemove) {
+       int idToRemove = programaToRemove.getId_programa();
         List<String> lines = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -94,7 +96,7 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
             }
 
             // Update the list
-            lista.remove(departamentoToRemove);
+            lista.remove(programaToRemove);
 
             // Write back the modified content
             try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
@@ -103,14 +105,16 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
                 }
             }
 
-            System.out.println("Departamento eliminado exitosamente.");
+            System.out.println("Municipio eliminado exitosamente.");
         } catch (IOException e) {
             System.err.println("Error al actualizar el archivo: " + e.getMessage());
         }
     }
-        
+
+     
+   
     @Override
-    public void read(){
+    public void read() {
         try (Scanner scanner = new Scanner(new File(fileName))) {
             System.out.println("Contenido del archivo " + fileName + ":\n");
             while (scanner.hasNextLine()) {
@@ -124,8 +128,8 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
     }
 
     @Override
-    public void update(Departamento departamentoToUpdate) {
-        int idToUpdate = departamentoToUpdate.getId_departamento();
+    public void update(Programa programaToUpdate) {
+        int idToUpdate = programaToUpdate.getId_programa();
         List<String> lines = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -135,16 +139,17 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
                 int id = Integer.parseInt(parts[0]);
 
                 if (id == idToUpdate) {
-                    // Actualizar la línea con la información del departamento modificado
-                    lines.add(idToUpdate + "," + departamentoToUpdate.getNombre_departamento());
+                    // Actualizar la línea con la información del programa modificado
+                    lines.add(idToUpdate + "," + programaToUpdate.getNombre() + "," +
+                              programaToUpdate.getSemestre() + "," + programaToUpdate.getLugar().getDireccion());
                 } else {
                     lines.add(line);
                 }
             }
 
             // Actualizar la lista
-            lista.remove(departamentoToUpdate);
-            lista.add(departamentoToUpdate);
+            lista.remove(programaToUpdate);
+            lista.add(programaToUpdate);
 
             // Escribir de nuevo el contenido modificado
             try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
@@ -153,11 +158,10 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
                 }
             }
 
-            System.out.println("Departamento actualizado exitosamente.");
+            System.out.println("Programa actualizado exitosamente.");
         } catch (IOException e) {
             System.err.println("Error al actualizar el archivo: " + e.getMessage());
         }
     }
 
-    
 }

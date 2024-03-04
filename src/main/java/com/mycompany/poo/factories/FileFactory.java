@@ -9,6 +9,7 @@ import com.mycompany.poo.repositories.file.DepartamentosCreados;
 import com.mycompany.poo.repositories.file.EstudiantesInscritos;
 import com.mycompany.poo.repositories.file.ListaLugares;
 import com.mycompany.poo.repositories.file.MunicipiosCreados;
+import com.mycompany.poo.repositories.file.ProgramasCreados;
 import com.mycompany.poo.repositories.interfaces.IRepository;
 
 
@@ -38,6 +39,6 @@ public class FileFactory implements IRepositoryFactory{
 
     @Override
     public IRepository<Programa> createProgramaRepository() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new ProgramasCreados("Programas.txt");
     }
 }

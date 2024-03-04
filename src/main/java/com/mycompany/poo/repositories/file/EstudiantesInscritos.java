@@ -30,8 +30,8 @@ import java.lang.reflect.Method;
  * @author Estudiante_MCA
  */
 public class EstudiantesInscritos implements IVisualizarInformacion, IRepository<Estudiante> {
-    private List<Estudiante> listado = new ArrayList<>();
-    private String fileName;
+    private final List<Estudiante> listado = new ArrayList<>();
+    private final String fileName;
     
      public EstudiantesInscritos(String fileName) {
         this.fileName = fileName;
@@ -75,7 +75,7 @@ public class EstudiantesInscritos implements IVisualizarInformacion, IRepository
             Programa programa = nuevoEstudiante.getPrograma();
             int idPrograma = programa.getId_programa();
             String nombrePrograma = programa.getNombre();
-            int semestrePrograma = programa.getSemestres();
+            int semestrePrograma = programa.getSemestre();
 
             Lugar direccion = nuevoEstudiante.getDireccion();
             String direccionLugar = direccion.getDireccion();
@@ -146,8 +146,51 @@ public class EstudiantesInscritos implements IVisualizarInformacion, IRepository
     }
 
     @Override
-    public void update(Estudiante entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(Estudiante estudianteToUpdate) {
+        int idToUpdate = (int) estudianteToUpdate.getId();
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Assuming the format is "nombre,apellido,idEstudiante,codigo,idPrograma,nombrePrograma,semestrePrograma,direccionLugar,idDepartamento,nombreDepartamento,idMunicipio,nombreMunicipio"
+                String[] parts = line.split(",");
+                int idEstudiante = Integer.parseInt(parts[2].trim());
+
+                if (idEstudiante == idToUpdate) {
+                    // Actualizar la línea con la información del estudiante modificado
+                    Programa programa = estudianteToUpdate.getPrograma();
+                    Lugar direccion = estudianteToUpdate.getDireccion();
+
+                    lines.add(estudianteToUpdate.getNombre() + "," + estudianteToUpdate.getApellido() + "," +
+                              estudianteToUpdate.getId() + "," + estudianteToUpdate.getCodigo() + "," +
+                              programa.getId_programa() + "," + programa.getNombre() + "," +
+                              programa.getSemestre() + "," +
+                              direccion.getDireccion() + "," + direccion.getDepartamento().getId_departamento() + "," +
+                              direccion.getDepartamento().getNombre_departamento() + "," +
+                              direccion.getMunicipio().getId_municipio() + "," +
+                              direccion.getMunicipio().getNombre_municipio());
+                } else {
+                    lines.add(line);
+                }
+            }
+
+            // Actualizar la lista
+            listado.remove(estudianteToUpdate);
+            listado.add(estudianteToUpdate);
+
+            // Escribir de nuevo el contenido modificado
+            try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+                for (String updatedLine : lines) {
+                    writer.println(updatedLine);
+                }
+            }
+
+            System.out.println("Estudiante actualizado exitosamente.");
+        } catch (IOException e) {
+            System.err.println("Error al actualizar el archivo: " + e.getMessage());
+        }
     }
+
 
 }

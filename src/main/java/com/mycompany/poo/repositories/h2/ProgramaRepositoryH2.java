@@ -46,7 +46,7 @@ public class ProgramaRepositoryH2 implements IRepository<Programa>{
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, programa.getId_programa());
             statement.setString(2, programa.getNombre());
-            statement.setInt(3, programa.getSemestres());
+            statement.setInt(3, programa.getSemestre());
             statement.setString(4, programa.getLugar().getDireccion());
             statement.executeUpdate();
         } catch (SQLException ex) {

@@ -25,8 +25,8 @@ import java.util.Scanner;
  * @author Estudiante_MCA
  */
 public class ListaLugares implements IVisualizarInformacion, IRepository<Lugar> {
-    private List<Lugar> lista;
-    private String fileName;
+    private final List<Lugar> lista = new ArrayList<>();
+    private final String fileName;
     
      public ListaLugares(String fileName) {
         this.fileName = fileName;
@@ -124,8 +124,45 @@ public class ListaLugares implements IVisualizarInformacion, IRepository<Lugar> 
     }
 
     @Override
-    public void update(Lugar entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(Lugar lugarToUpdate) {
+        String direccionToUpdate = lugarToUpdate.getDireccion();
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Assuming the format is "direccion,idDepartamento,nombreDepartamento,idMunicipio,nombreMunicipio"
+                String[] parts = line.split(",");
+                String direccion = parts[0].trim();
+
+                if (direccion.equals(direccionToUpdate)) {
+                    // Actualizar la línea con la información del lugar modificado
+                    lines.add(lugarToUpdate.getDireccion() + "," +
+                              lugarToUpdate.getDepartamento().getId_departamento() + "," +
+                              lugarToUpdate.getDepartamento().getNombre_departamento() + "," +
+                              lugarToUpdate.getMunicipio().getId_municipio() + "," +
+                              lugarToUpdate.getMunicipio().getNombre_municipio());
+                } else {
+                    lines.add(line);
+                }
+            }
+
+            // Actualizar la lista
+            lista.remove(lugarToUpdate);
+            lista.add(lugarToUpdate);
+
+            // Escribir de nuevo el contenido modificado
+            try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+                for (String updatedLine : lines) {
+                    writer.println(updatedLine);
+                }
+            }
+
+            System.out.println("Lugar actualizado exitosamente.");
+        } catch (IOException e) {
+            System.err.println("Error al actualizar el archivo: " + e.getMessage());
+        }
     }
+
     
 }

@@ -1,4 +1,4 @@
-2024-03-03 22:21:54.013044-05:00 jdbc[6]: null
+2024-03-04 00:11:34.328733-05:00 jdbc[6]: null
 org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
 The connection was not closed by the application and is garbage collected [90018-224]
 	at org.h2.message.DbException.get(DbException.java:223)
@@ -11,10 +11,9 @@ The connection was not closed by the application and is garbage collected [90018
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
 	at com.mycompany.poo.factories.ConnectionDatabase.getConnection(ConnectionDatabase.java:22)
 	at com.mycompany.poo.factories.H2Factory.createLugarRepository(H2Factory.java:116)
-	at com.mycompany.poo.factories.H2Factory.createLugarRepository(H2Factory.java:28)
-	at com.mycompany.poo.POO.main(POO.java:77)
+	at com.mycompany.poo.POO.main(POO.java:64)
 Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
 The connection was not closed by the application and is garbage collected [90018-224]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
-	... 12 more
+	... 11 more

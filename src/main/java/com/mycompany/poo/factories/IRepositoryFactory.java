@@ -3,16 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.poo.factories;
+
+import com.mycompany.poo.entities.Departamento;
+import com.mycompany.poo.entities.Estudiante;
+import com.mycompany.poo.entities.Lugar;
+import com.mycompany.poo.entities.Municipio;
+import com.mycompany.poo.entities.Programa;
+import com.mycompany.poo.repositories.interfaces.IRepository;
+
 /**
  *
  * @author danal
- * @param <T>
  */
 
-public interface IRepositoryFactory<T>{
-    T createDepartamentoRepository();
-    T createMunicipioRepository();
-    T createLugarRepository();
-    T createProgramaRepository();
-    T createEstudianteRepository();
+public interface IRepositoryFactory{
+    IRepository<Departamento> createDepartamentoRepository();
+    IRepository<Municipio>createMunicipioRepository();
+    IRepository<Lugar> createLugarRepository();
+    IRepository<Programa> createProgramaRepository();
+    IRepository<Estudiante> createEstudianteRepository();
 }

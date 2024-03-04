@@ -25,8 +25,8 @@ import java.lang.reflect.Method;
  * @author Estudiante_MCA
  */
 public class MunicipiosCreados implements IVisualizarInformacion, IRepository<Municipio>{
-    private List<Municipio> lista = new ArrayList<>();
-    private String fileName;
+    private final List<Municipio> lista = new ArrayList<>();
+    private final String fileName;
     
     public MunicipiosCreados(String nombreArchivo) {
         this.fileName = nombreArchivo;
@@ -58,6 +58,7 @@ public class MunicipiosCreados implements IVisualizarInformacion, IRepository<Mu
         return info.toString();
     }
     
+    @Override
     public void create(Municipio nuevoMunicipio){
          try (PrintWriter writer = new PrintWriter(new FileWriter(fileName, true))) {
             lista.add(nuevoMunicipio);  // Agregar el nuevoMunicipio a la lista
@@ -78,6 +79,7 @@ public class MunicipiosCreados implements IVisualizarInformacion, IRepository<Mu
     }
 
      
+    @Override
     public void delete(Municipio municipioToRemove) {
         int idToRemove = municipioToRemove.getId_municipio();
         List<String> lines = new ArrayList<>();
@@ -111,6 +113,7 @@ public class MunicipiosCreados implements IVisualizarInformacion, IRepository<Mu
 
      
    
+    @Override
     public void read() {
         try (Scanner scanner = new Scanner(new File(fileName))) {
             System.out.println("Contenido del archivo " + fileName + ":\n");
@@ -122,10 +125,45 @@ public class MunicipiosCreados implements IVisualizarInformacion, IRepository<Mu
         } catch (FileNotFoundException e) {
             System.err.println("Error al cargar el archivo: " + e.getMessage());
         }
-    }
+    }  
 
     @Override
-    public void update(Municipio entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update(Municipio municipioToUpdate) {
+        int idToUpdate = municipioToUpdate.getId_municipio();
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                int id = Integer.parseInt(parts[0].trim());
+
+                if (id == idToUpdate) {
+                    // Actualizar la línea con la información del municipio modificado
+                    lines.add(municipioToUpdate.getId_municipio() + "," +
+                              municipioToUpdate.getNombre_municipio() + "," +
+                              municipioToUpdate.getDepartamento().getId_departamento() + "," +
+                              municipioToUpdate.getDepartamento().getNombre_departamento());
+                } else {
+                    lines.add(line);
+                }
+            }
+
+            // Actualizar la lista
+            lista.remove(municipioToUpdate);
+            lista.add(municipioToUpdate);
+
+            // Escribir de nuevo el contenido modificado
+            try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+                for (String updatedLine : lines) {
+                    writer.println(updatedLine);
+                }
+            }
+
+            System.out.println("Municipio actualizado exitosamente.");
+        } catch (IOException e) {
+            System.err.println("Error al actualizar el archivo: " + e.getMessage());
+        }
     }
+
 }

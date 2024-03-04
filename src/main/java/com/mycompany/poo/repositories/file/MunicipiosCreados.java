@@ -123,4 +123,9 @@ public class MunicipiosCreados implements IVisualizarInformacion, IRepository<Mu
             System.err.println("Error al cargar el archivo: " + e.getMessage());
         }
     }
+
+    @Override
+    public void update(Municipio entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

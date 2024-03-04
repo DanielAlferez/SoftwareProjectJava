@@ -9,18 +9,12 @@ import com.mycompany.poo.entities.Estudiante;
 import com.mycompany.poo.entities.Lugar;
 import com.mycompany.poo.entities.Municipio;
 import com.mycompany.poo.entities.Programa;
-import com.mycompany.poo.repositories.file.DepartamentosCreados;
 import com.mycompany.poo.repositories.h2.DepartamentoRepositoryH2;
 import com.mycompany.poo.repositories.h2.EstudianteRepositoryH2;
 import com.mycompany.poo.repositories.h2.LugarRepositoryH2;
 import com.mycompany.poo.repositories.h2.MunicipioRepositoryH2;
 import com.mycompany.poo.repositories.h2.ProgramaRepositoryH2;
 import com.mycompany.poo.repositories.interfaces.IRepository;
-import com.mycompany.poo.repositories.interfaces.IRepositoryUpdatable;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -92,7 +86,7 @@ public class H2Factory implements IRepositoryFactory{
     }
      
     @Override
-    public IRepositoryUpdatable<Departamento> createDepartamentoRepository() {
+    public IRepository<Departamento> createDepartamentoRepository() {
         Connection connection = null;
         try {
             connection = ConnectionDatabase.getConnection();
@@ -104,7 +98,7 @@ public class H2Factory implements IRepositoryFactory{
     }
 
     @Override
-    public IRepositoryUpdatable<Municipio> createMunicipioRepository() {
+    public IRepository<Municipio> createMunicipioRepository() {
         Connection connection = null;
         try {
             connection = ConnectionDatabase.getConnection();
@@ -116,7 +110,7 @@ public class H2Factory implements IRepositoryFactory{
     }
 
     @Override
-    public IRepositoryUpdatable<Lugar> createLugarRepository() {
+    public IRepository<Lugar> createLugarRepository() {
         Connection connection = null;
         try {
             connection = ConnectionDatabase.getConnection();
@@ -128,7 +122,7 @@ public class H2Factory implements IRepositoryFactory{
     }
 
     @Override
-    public IRepositoryUpdatable<Programa> createProgramaRepository() {
+    public IRepository<Programa> createProgramaRepository() {
         Connection connection = null;
         try {
             connection = ConnectionDatabase.getConnection();
@@ -140,7 +134,7 @@ public class H2Factory implements IRepositoryFactory{
     }
 
     @Override
-    public IRepositoryUpdatable<Estudiante> createEstudianteRepository() {
+    public IRepository<Estudiante> createEstudianteRepository() {
         Connection connection = null;
         try {
             connection = ConnectionDatabase.getConnection();

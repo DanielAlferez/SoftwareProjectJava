@@ -11,5 +11,6 @@ package com.mycompany.poo.repositories.interfaces;
 public interface IRepository<T> {
     void create(T entity);
     void delete(T entity);
+    void update(T entity);
     void read();
 }

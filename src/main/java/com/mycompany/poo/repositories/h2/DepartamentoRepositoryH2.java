@@ -2,7 +2,7 @@ package com.mycompany.poo.repositories.h2;
 
 import com.mycompany.poo.entities.Departamento;
 import com.mycompany.poo.factories.ConnectionDatabase;
-import com.mycompany.poo.repositories.interfaces.IRepositoryUpdatable;
+import com.mycompany.poo.repositories.interfaces.IRepository;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DepartamentoRepositoryH2 implements IRepositoryUpdatable<Departamento> {
+public class DepartamentoRepositoryH2 implements IRepository<Departamento> {
 
 
     public DepartamentoRepositoryH2() {

@@ -122,5 +122,10 @@ public class ListaLugares implements IVisualizarInformacion, IRepository<Lugar> 
             System.err.println("Error al cargar el archivo: " + e.getMessage());
         }
     }
+
+    @Override
+    public void update(Lugar entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

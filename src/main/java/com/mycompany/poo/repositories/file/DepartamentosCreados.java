@@ -123,5 +123,10 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
             System.err.println("Error al cargar el archivo: " + e.getMessage());
         }
     }
+
+    @Override
+    public void update(Departamento entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

@@ -5,7 +5,7 @@
 package com.mycompany.poo.repositories.h2;
 
 import com.mycompany.poo.entities.Estudiante;
-import com.mycompany.poo.repositories.interfaces.IRepositoryUpdatable;
+import com.mycompany.poo.repositories.interfaces.IRepository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author danal
  */
 
-public class EstudianteRepositoryH2 implements IRepositoryUpdatable<Estudiante> {
+public class EstudianteRepositoryH2 implements IRepository<Estudiante> {
 
     
     private final Connection connection;

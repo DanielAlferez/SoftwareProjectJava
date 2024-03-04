@@ -145,4 +145,9 @@ public class EstudiantesInscritos implements IVisualizarInformacion, IRepository
         }
     }
 
+    @Override
+    public void update(Estudiante entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

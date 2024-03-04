@@ -9,7 +9,6 @@ import com.mycompany.poo.factories.FileFactory;
 import com.mycompany.poo.factories.H2Factory;
 import com.mycompany.poo.repositories.interfaces.IRepository;
 import com.mycompany.poo.factories.IRepositoryFactory;
-import com.mycompany.poo.repositories.interfaces.IRepositoryUpdatable;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -44,7 +43,7 @@ public class POO {
 
         //Departamento
          
-        IRepositoryUpdatable<Departamento> departamentoRepositoryh2 = (IRepositoryUpdatable<Departamento>) dbFactoryh2.createDepartamentoRepository();
+        IRepository<Departamento> departamentoRepositoryh2 = (IRepository<Departamento>) dbFactoryh2.createDepartamentoRepository();
         IRepository<Departamento> departamentoRepository = (IRepository<Departamento>) fileFactory.createDepartamentoRepository();
 
         departamentoRepositoryh2.create(D1);
@@ -60,7 +59,7 @@ public class POO {
         
         //Municipio
         
-        IRepositoryUpdatable<Municipio> municipioRepositoryh2 = (IRepositoryUpdatable<Municipio>) dbFactoryh2.createMunicipioRepository();
+        IRepository<Municipio> municipioRepositoryh2 = (IRepository<Municipio>) dbFactoryh2.createMunicipioRepository();
         IRepository<Municipio> municipioRepository = (IRepository<Municipio>) fileFactory.createMunicipioRepository();
         
         municipioRepositoryh2.create(M1);
@@ -75,7 +74,7 @@ public class POO {
         
         //Lugar
         
-         IRepositoryUpdatable<Lugar> lugarRepositoryh2 = (IRepositoryUpdatable<Lugar>) dbFactoryh2.createLugarRepository();
+         IRepository<Lugar> lugarRepositoryh2 = (IRepository<Lugar>) dbFactoryh2.createLugarRepository();
          IRepository<Lugar> lugarRepository = (IRepository<Lugar>) fileFactory.createLugarRepository();
          lugarRepositoryh2.create(L1);
          lugarRepositoryh2.create(L2);
@@ -89,7 +88,7 @@ public class POO {
          
          //Programa
          
-         IRepositoryUpdatable<Programa> programaRepositoryh2 = (IRepositoryUpdatable<Programa>) dbFactoryh2.createProgramaRepository();
+         IRepository<Programa> programaRepositoryh2 = (IRepository<Programa>) dbFactoryh2.createProgramaRepository();
          programaRepositoryh2.create(P1);
          programaRepositoryh2.create(P2);
          programaRepositoryh2.create(P3);
@@ -97,7 +96,7 @@ public class POO {
          
          //Estudiante
          
-         IRepositoryUpdatable<Estudiante> estudianteRepositoryh2 = (IRepositoryUpdatable<Estudiante>) dbFactoryh2.createEstudianteRepository();
+         IRepository<Estudiante> estudianteRepositoryh2 = (IRepository<Estudiante>) dbFactoryh2.createEstudianteRepository();
          IRepository<Estudiante> estudianteRepository = (IRepository<Estudiante>) fileFactory.createEstudianteRepository();
          
          estudianteRepositoryh2.create(E1);

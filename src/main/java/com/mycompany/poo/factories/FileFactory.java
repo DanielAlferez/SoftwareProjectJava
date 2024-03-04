@@ -9,23 +9,19 @@ import com.mycompany.poo.repositories.file.DepartamentosCreados;
 import com.mycompany.poo.repositories.file.EstudiantesInscritos;
 import com.mycompany.poo.repositories.file.ListaLugares;
 import com.mycompany.poo.repositories.file.MunicipiosCreados;
-import com.mycompany.poo.repositories.h2.EstudianteRepositoryH2;
-import com.mycompany.poo.repositories.h2.LugarRepositoryH2;
-import com.mycompany.poo.repositories.h2.MunicipioRepositoryH2;
-import com.mycompany.poo.repositories.h2.ProgramaRepositoryH2;
 import com.mycompany.poo.repositories.interfaces.IRepository;
-import com.mycompany.poo.repositories.interfaces.IRepositoryUpdatable;
 
-import java.sql.Connection;
 
 public class FileFactory implements IRepositoryFactory{
 
     
+    @Override
     public IRepository<Departamento> createDepartamentoRepository() {
         return new DepartamentosCreados("Departamentos.txt");
     }
     
      
+    @Override
     public IRepository<Municipio> createMunicipioRepository() {
         return new MunicipiosCreados("Municipios.txt");
     }
@@ -41,7 +37,7 @@ public class FileFactory implements IRepositoryFactory{
     }
 
     @Override
-    public Object createProgramaRepository() {
+    public IRepository<Programa> createProgramaRepository() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

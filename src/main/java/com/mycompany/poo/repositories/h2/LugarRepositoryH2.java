@@ -6,8 +6,7 @@ package com.mycompany.poo.repositories.h2;
 
 import com.mycompany.poo.entities.Departamento;
 import com.mycompany.poo.entities.Lugar;
-import com.mycompany.poo.repositories.interfaces.IRepositoryUpdatable;
-
+import com.mycompany.poo.repositories.interfaces.IRepository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +19,7 @@ import java.util.logging.Logger;
  * @author danal
  */
 
-public class LugarRepositoryH2 implements IRepositoryUpdatable<Lugar>{
+public class LugarRepositoryH2 implements IRepository<Lugar>{
 
     private Connection connection;
 

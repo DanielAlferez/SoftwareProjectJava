@@ -99,4 +99,28 @@ public class EstudianteRepositoryH2 implements IRepository<Estudiante> {
         }
         return estudiantes;
     }
+    
+    public static Estudiante buscarEstudiantePorId(Connection connection, int idEstudiante) {
+    String sql = "SELECT * FROM estudiante WHERE id_estudiante = ?";
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        statement.setInt(1, idEstudiante);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            String nombre = resultSet.getString("nombre");
+            String apellido = resultSet.getString("apellido");
+            double codigo = resultSet.getDouble("codigo");
+            int idPrograma = resultSet.getInt("programa_id");
+            String direccion = resultSet.getString("direccion");
+
+            Programa programa = ProgramaRepositoryH2.obtenerProgramaPorId(connection, idPrograma);
+            Lugar lugar = LugarRepositoryH2.obtenerLugarPorDireccion(connection, direccion);
+
+            Estudiante estudiante = new Estudiante(idEstudiante, nombre, apellido, codigo, programa, lugar);
+            return estudiante;
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace(); // Manejo básico de la excepción, puedes personalizarlo según tus necesidades
+    }
+    return null;
+}
 }

@@ -5,11 +5,15 @@
 package com.mycompany.poo.repositories.h2;
 
 import com.mycompany.poo.entities.Estudiante;
+import com.mycompany.poo.entities.Lugar;
+import com.mycompany.poo.entities.Programa;
 import com.mycompany.poo.repositories.interfaces.IRepository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,21 +75,28 @@ public class EstudianteRepositoryH2 implements IRepository<Estudiante> {
     }
 
     @Override
-    public void read() {
-    String sql = "SELECT * FROM estudiante";
-    try (PreparedStatement statement = connection.prepareStatement(sql);
-         ResultSet resultSet = statement.executeQuery()) {
-        while (resultSet.next()) {
-            int idEstudiante = resultSet.getInt("id_estudiante");
-            String nombre = resultSet.getString("nombre");
-            String apellido = resultSet.getString("apellido");
-            double codigo = resultSet.getDouble("codigo");
-            int idPrograma = resultSet.getInt("programa_id");
-            String direccion = resultSet.getString("direccion");
-            System.out.println("ID: " + idEstudiante + ",Nombre: " + nombre + ", Apellido: " + apellido + ", Código: " + codigo + ", ID del Programa: " + idPrograma + ", Dirección: " + direccion);
+    public List<Estudiante> read() {
+        List<Estudiante> estudiantes = new ArrayList<>();
+        String sql = "SELECT * FROM estudiante";
+        try (PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                int idEstudiante = resultSet.getInt("id_estudiante");
+                String nombre = resultSet.getString("nombre");
+                String apellido = resultSet.getString("apellido");
+                double codigo = resultSet.getDouble("codigo");
+                int idPrograma = resultSet.getInt("programa_id");
+                String direccion = resultSet.getString("direccion");
+                
+                Programa programa = ProgramaRepositoryH2.obtenerProgramaPorId(connection,idPrograma);
+                Lugar lugar = LugarRepositoryH2.obtenerLugarPorDireccion(connection,direccion);
+
+                Estudiante estudiante = new Estudiante(idEstudiante, nombre, apellido, codigo, programa, lugar);
+                estudiantes.add(estudiante);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Manejo básico de la excepción, puedes personalizarlo según tus necesidades
         }
-    } catch (SQLException ex) {
-        Logger.getLogger(EstudianteRepositoryH2.class.getName()).log(Level.SEVERE, null, ex);
+        return estudiantes;
     }
-}
 }

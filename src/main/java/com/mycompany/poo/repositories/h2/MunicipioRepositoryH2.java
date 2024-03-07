@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,8 +66,8 @@ public class MunicipioRepositoryH2 implements IRepository<Municipio>{
     }
 
     @Override
-    public void read() {
-
+    public List<Municipio> read() {
+        List<Municipio> municipios = new ArrayList<>();
         String sql = "SELECT * FROM municipio";
         try (PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
@@ -73,11 +75,38 @@ public class MunicipioRepositoryH2 implements IRepository<Municipio>{
                 int idMunicipio = resultSet.getInt("id_municipio");
                 String nombre = resultSet.getString("nombre_municipio");
                 int departamentoId = resultSet.getInt("departamento_id");
-                System.out.println("ID Municipio: " + idMunicipio + ", Nombre: " + nombre + ", ID Departamento: " + departamentoId);
+
+                // Obtener el objeto Departamento asociado al Municipio
+                Departamento departamento = DepartamentoRepositoryH2.obtenerDepartamentoPorId(connection, departamentoId);
+
+                // Construir el objeto Municipio y agregarlo a la lista
+                Municipio municipio = new Municipio(idMunicipio, nombre, departamento);
+                municipios.add(municipio);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(MunicipioRepositoryH2.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace(); // Manejo básico de la excepción, puedes personalizarlo según tus necesidades
         }
+        return municipios;
+    }
+    
+    public static Municipio obtenerMunicipioPorId(Connection connection, int idMunicipio) {
+        String sql = "SELECT * FROM municipio WHERE id_municipio = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, idMunicipio);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                // Obtener el departamento asociado al municipio
+                int idDepartamento = resultSet.getInt("departamento_id");
+                Departamento departamento = DepartamentoRepositoryH2.obtenerDepartamentoPorId(connection, idDepartamento);
+
+                // Suponiendo que la clase Municipio tiene un constructor apropiado
+                Municipio municipio = new Municipio(resultSet.getInt("id_municipio"), resultSet.getString("nombre_municipio"), departamento);
+                return municipio;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Manejo básico de la excepción, puedes personalizarlo según tus necesidades
+        }
+        return null;
     }
     
 }

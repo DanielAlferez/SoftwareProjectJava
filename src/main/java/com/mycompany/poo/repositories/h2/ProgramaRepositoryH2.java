@@ -5,12 +5,15 @@
 package com.mycompany.poo.repositories.h2;
 
 import com.mycompany.poo.entities.Departamento;
+import com.mycompany.poo.entities.Lugar;
 import com.mycompany.poo.entities.Programa;
 import com.mycompany.poo.repositories.interfaces.IRepository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,7 +69,8 @@ public class ProgramaRepositoryH2 implements IRepository<Programa>{
     }
 
     @Override
-    public void read() {
+    public List<Programa> read() {
+        List<Programa> programas = new ArrayList<>();
         String sql = "SELECT * FROM programa";
         try (PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
@@ -75,10 +79,37 @@ public class ProgramaRepositoryH2 implements IRepository<Programa>{
                 String nombre = resultSet.getString("nombre");
                 int semestre = resultSet.getInt("semestre");
                 String direccion = resultSet.getString("direccion");
-                System.out.println("ID Programa: " + idPrograma + ", Nombre: " + nombre + ", Semestre: " + semestre + ", Dirección: " + direccion);
+
+                // Obtener el objeto Lugar asociado al Programa
+                Lugar lugar = LugarRepositoryH2.obtenerLugarPorDireccion(connection, direccion);
+
+                // Construir el objeto Programa y agregarlo a la lista
+                Programa programa = new Programa(idPrograma, nombre, semestre, lugar);
+                programas.add(programa);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ProgramaRepositoryH2.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace(); // Manejo básico de la excepción, puedes personalizarlo según tus necesidades
         }
+        return programas;
+    }
+    
+    public static Programa obtenerProgramaPorId(Connection connection, int idPrograma) {
+        String sql = "SELECT * FROM programa WHERE id_programa = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, idPrograma);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String direccion = resultSet.getString("direccion");
+                // Obtener el objeto Lugar asociado al programa
+                Lugar lugar = LugarRepositoryH2.obtenerLugarPorDireccion(connection, direccion);
+
+                // Suponiendo que la clase Programa tiene un constructor apropiado
+                Programa programa = new Programa(resultSet.getInt("id_programa"), resultSet.getString("nombre"), resultSet.getInt("semestre"), lugar);
+                return programa;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Manejo básico de la excepción, puedes personalizarlo según tus necesidades
+        }
+        return null;
     }
 }

@@ -132,17 +132,36 @@ public class EstudiantesInscritos implements IVisualizarInformacion, IRepository
     }
 
     @Override
-    public void read() {
+    public List<Estudiante> read() {
+        List<Estudiante> estudiantes = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(fileName))) {
-            System.out.println("Contenido del archivo " + fileName + ":\n");
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
-                System.out.println(linea);
+                // Dividir la línea en partes para obtener los atributos del estudiante
+                String[] partes = linea.split(",");
+                if (partes.length == 6) {
+                    int idEstudiante = Integer.parseInt(partes[0].trim());
+                    String nombre = partes[1].trim();
+                    String apellido = partes[2].trim();
+                    double codigo = Double.parseDouble(partes[3].trim());
+                    int idPrograma = Integer.parseInt(partes[4].trim());
+                    String idDireccion = partes[5].trim();
+
+                    // Obtener el objeto Programa asociado al Estudiante
+                    Programa programa = ProgramasCreados.buscarProgramaPorId(idPrograma,fileName);
+
+                    // Obtener el objeto Lugar asociado al Estudiante
+                    Lugar direccion = ListaLugares.buscarPorDireccion(idDireccion,fileName);
+
+                    // Construir el objeto Estudiante y agregarlo a la lista
+                    Estudiante estudiante = new Estudiante(idEstudiante, nombre, apellido, codigo, programa, direccion);
+                    estudiantes.add(estudiante);
+                }
             }
-            System.out.println("\nFin del archivo.\n");
         } catch (FileNotFoundException e) {
             System.err.println("Error al cargar el archivo: " + e.getMessage());
         }
+        return estudiantes;
     }
 
     @Override

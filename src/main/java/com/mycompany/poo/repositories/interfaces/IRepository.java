@@ -4,6 +4,8 @@
  */
 package com.mycompany.poo.repositories.interfaces;
 
+import java.util.List;
+
 /**
  *
  * @author danal
@@ -12,5 +14,5 @@ public interface IRepository<T> {
     void create(T entity);
     void delete(T entity);
     void update(T entity);
-    void read();
+    List<T> read();
 }

@@ -110,17 +110,24 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
     }
         
     @Override
-    public void read(){
+    public List<Departamento> read() {
+        List<Departamento> departamentos = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(fileName))) {
-            System.out.println("Contenido del archivo " + fileName + ":\n");
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
-                System.out.println(linea);
+                // Dividir la línea en partes para obtener el ID y el nombre del departamento
+                String[] partes = linea.split(",");
+                if (partes.length == 2) {
+                    int id = Integer.parseInt(partes[0].trim());
+                    String nombre = partes[1].trim();
+                    Departamento departamento = new Departamento(id, nombre);
+                    departamentos.add(departamento);
+                }
             }
-            System.out.println("\nFin del archivo.\n");
         } catch (FileNotFoundException e) {
             System.err.println("Error al cargar el archivo: " + e.getMessage());
         }
+        return departamentos;
     }
 
     @Override
@@ -159,5 +166,24 @@ public class DepartamentosCreados implements IVisualizarInformacion, IRepository
         }
     }
 
+       public static Departamento buscarDepartamentoPorId(int idBuscado, String fileName) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            while (scanner.hasNextLine()) {
+                String linea = scanner.nextLine();
+                // Dividir la línea en partes para obtener el ID y el nombre del departamento
+                String[] partes = linea.split(",");
+                if (partes.length == 2) {
+                    int id = Integer.parseInt(partes[0].trim());
+                    if (id == idBuscado) {
+                        String nombre = partes[1].trim();
+                        return new Departamento(id, nombre);
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Error al cargar el archivo: " + e.getMessage());
+        }
+        return null; // Retorna null si el departamento no se encuentra
+    }
     
 }

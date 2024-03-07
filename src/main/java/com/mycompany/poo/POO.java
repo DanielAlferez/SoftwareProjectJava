@@ -12,6 +12,7 @@ import com.mycompany.poo.repositories.interfaces.IRepository;
 import com.mycompany.poo.factories.IRepositoryFactory;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class POO {
 
@@ -38,56 +39,13 @@ public class POO {
         Estudiante E3 = new Estudiante(3, "Jose", "Perez", 4339, P3, L3);
         
         FactoryDB factory = FactoryDB.getInstance();
-        IRepositoryFactory dbFactory = factory.getDatabase();;
+        IRepositoryFactory dbFactory = factory.getDatabase();
         
-        //Departamento
-        IRepository<Departamento> departamentoRepository = dbFactory.createDepartamentoRepository();
-        departamentoRepository.create(D1);
-        departamentoRepository.create(D2);
-        departamentoRepository.create(D3);
-        Departamento D3_updated =  new Departamento(3, "Cundinamarca");
-        departamentoRepository.update(D3_updated);
-        departamentoRepository.delete(D2);
-        departamentoRepository.read();
-        
-        //Municipio
-        IRepository<Municipio> municipioRepository = dbFactory.createMunicipioRepository();
-        municipioRepository.create(M1);
-        municipioRepository.create(M2);
-        municipioRepository.create(M3);
-        Municipio M3_updated = new Municipio(3, "Cáqueza", D3);
-        municipioRepository.update(M3_updated);
-        municipioRepository.delete(M2);
-        municipioRepository.read();
-        
-        //Lugar
-        IRepository<Lugar> lugarRepository = dbFactory.createLugarRepository();
-        lugarRepository.create(L1);
-        lugarRepository.create(L2);
-        lugarRepository.create(L3);
-        Lugar L3_updated = new Lugar("dir 3.1", D1, M1);
-        lugarRepository.update(L3_updated);
-        lugarRepository.delete(L2);
-        lugarRepository.read();
-        
-        //Programa
-        IRepository<Programa> programaRepository = dbFactory.createProgramaRepository();
-        programaRepository.create(P1);
-        programaRepository.create(P2);
-        programaRepository.create(P3);
-        Programa P3_updated = new Programa(3, "Agroindustrial", 4, L3);
-        programaRepository.update(P3_updated);
-        programaRepository.delete(P2);
-        programaRepository.read();
+         IRepository<Departamento> departamentoRepository = dbFactory.createDepartamentoRepository();
+        List<Departamento> departamentos = departamentoRepository.read();
          
-        //Estudiante
-        IRepository<Estudiante> estudianteRepository = dbFactory.createEstudianteRepository();
-        estudianteRepository.create(E1);
-        estudianteRepository.create(E2);
-        estudianteRepository.create(E3);
-        Estudiante E3_updated = new Estudiante(3, "Jose", "Martinez", 4339, P3, L3);
-        estudianteRepository.update(E3_updated);
-        estudianteRepository.delete(E2);
-        estudianteRepository.read();
+        for (Departamento departamento : departamentos) {
+        System.out.println("ID: " + departamento.getId_departamento() + ", Nombre: " + departamento.getNombre_departamento());
+    }
     }
 }

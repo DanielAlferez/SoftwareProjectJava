@@ -4,6 +4,7 @@
  */
 package com.mycompany.poo.repositories.file;
 
+import com.mycompany.poo.entities.Lugar;
 import com.mycompany.poo.repositories.interfaces.IRepository;
 import com.mycompany.poo.repositories.interfaces.IVisualizarInformacion;
 import com.mycompany.poo.entities.Programa;
@@ -114,17 +115,31 @@ public class ProgramasCreados implements IVisualizarInformacion, IRepository<Pro
      
    
     @Override
-    public void read() {
+    public List<Programa> read() {
+        List<Programa> programas = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(fileName))) {
-            System.out.println("Contenido del archivo " + fileName + ":\n");
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
-                System.out.println(linea);
+                // Dividir la línea en partes para obtener los atributos del programa
+                String[] partes = linea.split(",");
+                if (partes.length == 4) {
+                    int idPrograma = Integer.parseInt(partes[0].trim());
+                    String nombre = partes[1].trim();
+                    int semestre = Integer.parseInt(partes[2].trim());
+                    String direccion = partes[3].trim();
+
+                    // Obtener el objeto Lugar asociado al Programa
+                    Lugar lugar = ListaLugares.buscarPorDireccion(direccion, fileName);
+
+                    // Construir el objeto Programa y agregarlo a la lista
+                    Programa programa = new Programa(idPrograma, nombre, semestre, lugar);
+                    programas.add(programa);
+                }
             }
-            System.out.println("\nFin del archivo.\n");
         } catch (FileNotFoundException e) {
             System.err.println("Error al cargar el archivo: " + e.getMessage());
         }
+        return programas;
     }
 
     @Override
@@ -164,4 +179,30 @@ public class ProgramasCreados implements IVisualizarInformacion, IRepository<Pro
         }
     }
 
+    public static Programa buscarProgramaPorId(int idBuscado, String fileName) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            while (scanner.hasNextLine()) {
+                String linea = scanner.nextLine();
+                // Dividir la línea en partes para obtener los atributos del programa
+                String[] partes = linea.split(",");
+                if (partes.length == 4) {
+                    int idPrograma = Integer.parseInt(partes[0].trim());
+                    if (idPrograma == idBuscado) {
+                        String nombre = partes[1].trim();
+                        int semestre = Integer.parseInt(partes[2].trim());
+                        String direccion = partes[3].trim();
+
+                        // Obtener el objeto Lugar asociado al Programa
+                        Lugar lugar = ListaLugares.buscarPorDireccion(direccion,fileName);
+
+                        // Construir y retornar el objeto Programa
+                        return new Programa(idPrograma, nombre, semestre, lugar);
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Error al cargar el archivo: " + e.getMessage());
+        }
+        return null; // Retorna null si el programa no se encuentra
+    }
 }

@@ -4,8 +4,11 @@
  */
 package com.mycompany.poo.repositories.file;
 
+import com.mycompany.poo.entities.Departamento;
 import com.mycompany.poo.repositories.interfaces.IVisualizarInformacion;
 import com.mycompany.poo.entities.Lugar;
+import com.mycompany.poo.entities.Municipio;
+import static com.mycompany.poo.repositories.file.DepartamentosCreados.buscarDepartamentoPorId;
 import com.mycompany.poo.repositories.interfaces.IRepository;
 import java.io.BufferedReader;
 import java.io.File;
@@ -110,17 +113,31 @@ public class ListaLugares implements IVisualizarInformacion, IRepository<Lugar> 
     }
 
     @Override
-    public void read() {
+    public List<Lugar> read() {
+        List<Lugar> lugares = new ArrayList<>();
         try (Scanner scanner = new Scanner(new File(fileName))) {
-            System.out.println("Contenido del archivo " + fileName + ":\n");
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
-                System.out.println(linea);
+                // Dividir la línea en partes para obtener la dirección, el ID del departamento y el ID del municipio
+                String[] partes = linea.split(",");
+                if (partes.length == 3) {
+                    String direccion = partes[0].trim();
+                    int departamentoId = Integer.parseInt(partes[1].trim());
+                    int municipioId = Integer.parseInt(partes[2].trim());
+
+                    // Obtener el objeto Departamento y Municipio asociados al Lugar
+                    Departamento departamento = DepartamentosCreados.buscarDepartamentoPorId(departamentoId,fileName);
+                    Municipio municipio = MunicipiosCreados.buscarMunicipioPorId(municipioId, fileName);
+
+                    // Construir el objeto Lugar y agregarlo a la lista
+                    Lugar lugar = new Lugar(direccion, departamento, municipio);
+                    lugares.add(lugar);
+                }
             }
-            System.out.println("\nFin del archivo.\n");
         } catch (FileNotFoundException e) {
             System.err.println("Error al cargar el archivo: " + e.getMessage());
         }
+        return lugares;
     }
 
     @Override
@@ -164,5 +181,34 @@ public class ListaLugares implements IVisualizarInformacion, IRepository<Lugar> 
         }
     }
 
-    
+    public static Lugar buscarPorDireccion(String direccionBuscada, String fileName) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            while (scanner.hasNextLine()) {
+                String linea = scanner.nextLine();
+                // Dividir la línea en partes para obtener la dirección, ID del departamento y ID del municipio del lugar
+                String[] partes = linea.split(",");
+                if (partes.length == 3) {
+                    String direccion = partes[0].trim();
+                    if (direccion.equals(direccionBuscada)) {
+                        int idDepartamento = Integer.parseInt(partes[1].trim());
+                        int idMunicipio = Integer.parseInt(partes[2].trim());
+                        
+                        // Obtener el objeto Departamento y Municipio asociados al Lugar
+                        Departamento departamento = buscarDepartamentoPorId(idDepartamento, "departamentos.txt");
+                        Municipio municipio = MunicipiosCreados.buscarMunicipioPorId(idMunicipio, "municipios.txt");
+                        
+                        if (departamento != null && municipio != null) {
+                            return new Lugar(direccion, departamento, municipio);
+                        } else {
+                            System.err.println("No se pudo encontrar el departamento o el municipio asociado al lugar con dirección: " + direccion);
+                            return null;
+                        }
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Error al cargar el archivo: " + e.getMessage());
+        }
+        return null; // Retorna null si el lugar no se encuentra
+    }
 }

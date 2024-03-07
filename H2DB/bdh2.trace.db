@@ -1,19 +1,196 @@
-2024-03-04 00:11:34.328733-05:00 jdbc[6]: null
-org.h2.message.DbException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
-The connection was not closed by the application and is garbage collected [90018-224]
-	at org.h2.message.DbException.get(DbException.java:223)
-	at org.h2.message.DbException.get(DbException.java:199)
-	at org.h2.message.DbException.get(DbException.java:188)
-	at org.h2.jdbc.JdbcConnection.closeOld(JdbcConnection.java:218)
-	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:135)
+2024-03-07 00:58:17.181893-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 00:59:09.095966-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 01:02:33.269878-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 01:04:52.332183-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 02:42:21.289467-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 02:43:19.893097-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 02:43:59.487115-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 02:53:07.493440-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:03:02.965145-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:07:56.757759-05:00 database: flush
+org.h2.message.DbException: Error General : "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Andres/Documents/NetBeansProjects/SoftwareProjectJava/H2DB/bdh2.mv.db [2.2.224/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Andres/Documents/NetBeansProjects/SoftwareProjectJava/H2DB/bdh2.mv.db [2.2.224/7]" [50000-224]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:407)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:1546)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:371)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:291)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2035)
+	at org.h2.mvstore.db.Store.<init>(Store.java:133)
+	at org.h2.engine.Database.<init>(Database.java:326)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:343)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:125)
 	at org.h2.Driver.connect(Driver.java:59)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
 	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
 	at com.mycompany.poo.factories.ConnectionDatabase.getConnection(ConnectionDatabase.java:22)
-	at com.mycompany.poo.factories.H2Factory.createLugarRepository(H2Factory.java:116)
-	at com.mycompany.poo.POO.main(POO.java:64)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: La conexión no fue cerrada por la aplicación y esta siendo limpiada (garbage collected)
-The connection was not closed by the application and is garbage collected [90018-224]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at com.mycompany.poo.factories.H2Factory.ejecutarScriptSQL(H2Factory.java:39)
+	at com.mycompany.poo.factories.H2Factory.<init>(H2Factory.java:32)
+	at com.mycompany.poo.factories.FactoryDB.getDatabase(FactoryDB.java:37)
+	at com.mycompany.poo.GUI.<init>(GUI.java:29)
+	at com.mycompany.poo.GUI$7.run(GUI.java:468)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:318)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:773)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:742)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Error General : "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Andres/Documents/NetBeansProjects/SoftwareProjectJava/H2DB/bdh2.mv.db [2.2.224/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Andres/Documents/NetBeansProjects/SoftwareProjectJava/H2DB/bdh2.mv.db [2.2.224/7]" [50000-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
-	... 11 more
+	... 36 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Andres/Documents/NetBeansProjects/SoftwareProjectJava/H2DB/bdh2.mv.db [2.2.224/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
+	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
+	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
+	... 30 more
+2024-03-07 03:07:56.823859-05:00 database: flush
+org.h2.message.DbException: Error General : "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Andres/Documents/NetBeansProjects/SoftwareProjectJava/H2DB/bdh2.mv.db [2.2.224/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Andres/Documents/NetBeansProjects/SoftwareProjectJava/H2DB/bdh2.mv.db [2.2.224/7]" [50000-224]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:407)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:122)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:1546)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:371)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:291)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2035)
+	at org.h2.mvstore.db.Store.<init>(Store.java:133)
+	at org.h2.engine.Database.<init>(Database.java:326)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:343)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:125)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:683)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:230)
+	at com.mycompany.poo.factories.ConnectionDatabase.getConnection(ConnectionDatabase.java:22)
+	at com.mycompany.poo.factories.H2Factory.createDepartamentoRepository(H2Factory.java:92)
+	at com.mycompany.poo.GUI.<init>(GUI.java:31)
+	at com.mycompany.poo.GUI$7.run(GUI.java:468)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:318)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:773)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:742)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Error General : "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Andres/Documents/NetBeansProjects/SoftwareProjectJava/H2DB/bdh2.mv.db [2.2.224/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Andres/Documents/NetBeansProjects/SoftwareProjectJava/H2DB/bdh2.mv.db [2.2.224/7]" [50000-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 34 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/Andres/Documents/NetBeansProjects/SoftwareProjectJava/H2DB/bdh2.mv.db [2.2.224/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:996)
+	at org.h2.mvstore.SingleFileStore.lockFileChannel(SingleFileStore.java:143)
+	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:117)
+	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
+	... 28 more
+2024-03-07 03:09:00.705794-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:10:32.350081-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:13:38.984440-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:16:45.938941-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:17:22.371485-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:21:30.741456-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:36:02.066837-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:36:38.922093-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:37:59.839123-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:42:59.663408-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:45:07.997471-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:48:34.050000-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:51:58.721637-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 03:54:03.831484-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]
+2024-03-07 04:06:43.662208-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "DEPARTAMENTO" ya existe
+Table "DEPARTAMENTO" already exists; SQL statement:
+CREATE TABLE Departamento (id_departamento INT PRIMARY KEY, nombre_departamento VARCHAR(255)) [42101-224]

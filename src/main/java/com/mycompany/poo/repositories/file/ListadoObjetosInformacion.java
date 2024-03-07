@@ -53,17 +53,9 @@ public class ListadoObjetosInformacion implements IRepository<IVisualizarInforma
     }
 
     @Override
-    public void read() {
-           try (Scanner scanner = new Scanner(new File(fileName))) {
-            System.out.println("Contenido del archivo " + fileName + ":\n");
-            while (scanner.hasNextLine()) {
-                String linea = scanner.nextLine();
-                System.out.println(linea);
-            }
-            System.out.println("\nFin del archivo.\n");
-        } catch (FileNotFoundException e) {
-            System.err.println("Error al cargar el archivo: " + e.getMessage());
-        }
+    public List<IVisualizarInformacion>read(){
+          System.out.println("");
+        return null;
     }
 
     @Override

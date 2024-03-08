@@ -82,16 +82,16 @@ public class ListaLugares implements IVisualizarInformacion, IRepository<Lugar> 
 
     @Override
     public void delete(Lugar lugarToRemove) {
+        String idToRemove = lugarToRemove.getDireccion();
         List<String> lines = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Assuming the format is "direccion,idDepartamento,nombreDepartamento,idMunicipio,nombreMunicipio"
                 String[] parts = line.split(",");
-                String direccion = parts[0].trim();
+                String id = parts[0];
 
-                if (!direccion.equals(lugarToRemove.getDireccion())) {
+                if (id != idToRemove) {
                     lines.add(line);
                 }
             }
@@ -106,7 +106,7 @@ public class ListaLugares implements IVisualizarInformacion, IRepository<Lugar> 
                 }
             }
 
-            System.out.println("Lugar eliminado exitosamente.");
+            System.out.println("Lugares eliminado exitosamente.");
         } catch (IOException e) {
             System.err.println("Error al actualizar el archivo: " + e.getMessage());
         }
@@ -120,15 +120,14 @@ public class ListaLugares implements IVisualizarInformacion, IRepository<Lugar> 
                 String linea = scanner.nextLine();
                 // Dividir la línea en partes para obtener la dirección, el ID del departamento y el ID del municipio
                 String[] partes = linea.split(",");
-                if (partes.length == 3) {
+                if (partes.length == 5) {
                     String direccion = partes[0].trim();
                     int departamentoId = Integer.parseInt(partes[1].trim());
-                    int municipioId = Integer.parseInt(partes[2].trim());
-
+                    int municipioId = Integer.parseInt(partes[3].trim());
+                    
                     // Obtener el objeto Departamento y Municipio asociados al Lugar
-                    Departamento departamento = DepartamentosCreados.buscarDepartamentoPorId(departamentoId,fileName);
-                    Municipio municipio = MunicipiosCreados.buscarMunicipioPorId(municipioId, fileName);
-
+                    Departamento departamento = DepartamentosCreados.buscarDepartamentoPorId(departamentoId, "Departamentos.txt");
+                    Municipio municipio = MunicipiosCreados.buscarMunicipioPorId(municipioId, "Municipios.txt");
                     // Construir el objeto Lugar y agregarlo a la lista
                     Lugar lugar = new Lugar(direccion, departamento, municipio);
                     lugares.add(lugar);
@@ -181,21 +180,21 @@ public class ListaLugares implements IVisualizarInformacion, IRepository<Lugar> 
         }
     }
 
-    public static Lugar buscarPorDireccion(String direccionBuscada, String fileName) {
+    public static Lugar buscarLugarPorDireccion(String direccionBuscada, String fileName) {
         try (Scanner scanner = new Scanner(new File(fileName))) {
             while (scanner.hasNextLine()) {
                 String linea = scanner.nextLine();
                 // Dividir la línea en partes para obtener la dirección, ID del departamento y ID del municipio del lugar
                 String[] partes = linea.split(",");
-                if (partes.length == 3) {
+                if (partes.length == 5) {
                     String direccion = partes[0].trim();
                     if (direccion.equals(direccionBuscada)) {
                         int idDepartamento = Integer.parseInt(partes[1].trim());
-                        int idMunicipio = Integer.parseInt(partes[2].trim());
+                        int idMunicipio = Integer.parseInt(partes[3].trim());
                         
                         // Obtener el objeto Departamento y Municipio asociados al Lugar
-                        Departamento departamento = buscarDepartamentoPorId(idDepartamento, "departamentos.txt");
-                        Municipio municipio = MunicipiosCreados.buscarMunicipioPorId(idMunicipio, "municipios.txt");
+                        Departamento departamento = buscarDepartamentoPorId(idDepartamento, "Departamentos.txt");
+                        Municipio municipio = MunicipiosCreados.buscarMunicipioPorId(idMunicipio, "Municipios.txt");
                         
                         if (departamento != null && municipio != null) {
                             return new Lugar(direccion, departamento, municipio);

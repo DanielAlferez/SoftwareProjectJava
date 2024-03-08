@@ -88,8 +88,8 @@ public class EstudianteRepositoryH2 implements IRepository<Estudiante> {
                 int idPrograma = resultSet.getInt("programa_id");
                 String direccion = resultSet.getString("direccion");
                 
-                Programa programa = ProgramaRepositoryH2.obtenerProgramaPorId(connection,idPrograma);
-                Lugar lugar = LugarRepositoryH2.obtenerLugarPorDireccion(connection,direccion);
+                Programa programa = ProgramaRepositoryH2.buscarProgramaPorId(connection,idPrograma);
+                Lugar lugar = LugarRepositoryH2.buscarLugarPorDireccion(connection,direccion);
 
                 Estudiante estudiante = new Estudiante(idEstudiante, nombre, apellido, codigo, programa, lugar);
                 estudiantes.add(estudiante);
@@ -112,8 +112,8 @@ public class EstudianteRepositoryH2 implements IRepository<Estudiante> {
             int idPrograma = resultSet.getInt("programa_id");
             String direccion = resultSet.getString("direccion");
 
-            Programa programa = ProgramaRepositoryH2.obtenerProgramaPorId(connection, idPrograma);
-            Lugar lugar = LugarRepositoryH2.obtenerLugarPorDireccion(connection, direccion);
+            Programa programa = ProgramaRepositoryH2.buscarProgramaPorId(connection, idPrograma);
+            Lugar lugar = LugarRepositoryH2.buscarLugarPorDireccion(connection, direccion);
 
             Estudiante estudiante = new Estudiante(idEstudiante, nombre, apellido, codigo, programa, lugar);
             return estudiante;

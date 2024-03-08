@@ -129,7 +129,7 @@ public class ProgramasCreados implements IVisualizarInformacion, IRepository<Pro
                     String direccion = partes[3].trim();
 
                     // Obtener el objeto Lugar asociado al Programa
-                    Lugar lugar = ListaLugares.buscarPorDireccion(direccion, fileName);
+                    Lugar lugar = ListaLugares.buscarLugarPorDireccion(direccion, "Lugares.txt");
 
                     // Construir el objeto Programa y agregarlo a la lista
                     Programa programa = new Programa(idPrograma, nombre, semestre, lugar);
@@ -193,7 +193,7 @@ public class ProgramasCreados implements IVisualizarInformacion, IRepository<Pro
                         String direccion = partes[3].trim();
 
                         // Obtener el objeto Lugar asociado al Programa
-                        Lugar lugar = ListaLugares.buscarPorDireccion(direccion,fileName);
+                        Lugar lugar = ListaLugares.buscarLugarPorDireccion(direccion,fileName);
 
                         // Construir y retornar el objeto Programa
                         return new Programa(idPrograma, nombre, semestre, lugar);

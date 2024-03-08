@@ -77,7 +77,7 @@ public class MunicipioRepositoryH2 implements IRepository<Municipio>{
                 int departamentoId = resultSet.getInt("departamento_id");
 
                 // Obtener el objeto Departamento asociado al Municipio
-                Departamento departamento = DepartamentoRepositoryH2.obtenerDepartamentoPorId(connection, departamentoId);
+                Departamento departamento = DepartamentoRepositoryH2.buscarDepartamentoPorId(connection, departamentoId);
 
                 // Construir el objeto Municipio y agregarlo a la lista
                 Municipio municipio = new Municipio(idMunicipio, nombre, departamento);
@@ -89,7 +89,7 @@ public class MunicipioRepositoryH2 implements IRepository<Municipio>{
         return municipios;
     }
     
-    public static Municipio obtenerMunicipioPorId(Connection connection, int idMunicipio) {
+    public static Municipio buscarMunicipioPorId(Connection connection, int idMunicipio) {
         String sql = "SELECT * FROM municipio WHERE id_municipio = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idMunicipio);
@@ -97,7 +97,7 @@ public class MunicipioRepositoryH2 implements IRepository<Municipio>{
             if (resultSet.next()) {
                 // Obtener el departamento asociado al municipio
                 int idDepartamento = resultSet.getInt("departamento_id");
-                Departamento departamento = DepartamentoRepositoryH2.obtenerDepartamentoPorId(connection, idDepartamento);
+                Departamento departamento = DepartamentoRepositoryH2.buscarDepartamentoPorId(connection, idDepartamento);
 
                 // Suponiendo que la clase Municipio tiene un constructor apropiado
                 Municipio municipio = new Municipio(resultSet.getInt("id_municipio"), resultSet.getString("nombre_municipio"), departamento);

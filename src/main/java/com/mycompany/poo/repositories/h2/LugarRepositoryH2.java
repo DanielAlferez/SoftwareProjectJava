@@ -79,8 +79,8 @@ public class LugarRepositoryH2 implements IRepository<Lugar>{
                 int municipioId = resultSet.getInt("municipio_id");
 
                 // Obtener el objeto Departamento y Municipio asociados al Lugar
-                Departamento departamento = DepartamentoRepositoryH2.obtenerDepartamentoPorId(connection, departamentoId);
-                Municipio municipio = MunicipioRepositoryH2.obtenerMunicipioPorId(connection, municipioId);
+                Departamento departamento = DepartamentoRepositoryH2.buscarDepartamentoPorId(connection, departamentoId);
+                Municipio municipio = MunicipioRepositoryH2.buscarMunicipioPorId(connection, municipioId);
 
                 // Construir el objeto Lugar y agregarlo a la lista
                 Lugar lugar = new Lugar(direccion, departamento, municipio);
@@ -92,7 +92,7 @@ public class LugarRepositoryH2 implements IRepository<Lugar>{
         return lugares;
     }
     
-     public static Lugar obtenerLugarPorDireccion(Connection connection, String direccion) {
+     public static Lugar buscarLugarPorDireccion(Connection connection, String direccion) {
         String sql = "SELECT * FROM lugar WHERE direccion = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, direccion);
@@ -101,8 +101,8 @@ public class LugarRepositoryH2 implements IRepository<Lugar>{
                 int idDepartamento = resultSet.getInt("departamento_id");
                 int idMunicipio = resultSet.getInt("municipio_id");
                 // Obtener el departamento y el municipio
-                Departamento departamento = DepartamentoRepositoryH2.obtenerDepartamentoPorId(connection, idDepartamento);
-                Municipio municipio = MunicipioRepositoryH2.obtenerMunicipioPorId(connection, idMunicipio);
+                Departamento departamento = DepartamentoRepositoryH2.buscarDepartamentoPorId(connection, idDepartamento);
+                Municipio municipio = MunicipioRepositoryH2.buscarMunicipioPorId(connection, idMunicipio);
                 // Crear el objeto Lugar con los objetos Departamento y Municipio
                 Lugar lugar = new Lugar(direccion, departamento, municipio);
                 return lugar;

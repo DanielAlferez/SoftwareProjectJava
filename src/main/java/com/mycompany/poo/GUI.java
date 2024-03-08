@@ -129,7 +129,7 @@ public class GUI extends javax.swing.JFrame {
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Usuario no Seleccionado");
         } else {
-            Departamento departamento = DepartamentoRepositoryH2.obtenerDepartamentoPorId(ConnectionDatabase.getConnection(), idDepartamento);
+            Departamento departamento = DepartamentoRepositoryH2.buscarDepartamentoPorId(ConnectionDatabase.getConnection(), idDepartamento);
             departamentoRepository.delete(departamento);
             JOptionPane.showMessageDialog(null, "Departamento Eliminado");
             limpiarTablaD();
@@ -208,7 +208,7 @@ public class GUI extends javax.swing.JFrame {
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Usuario no Seleccionado");
         } else {
-            Municipio municipio = MunicipioRepositoryH2.obtenerMunicipioPorId(ConnectionDatabase.getConnection(), idMunicipio);
+            Municipio municipio = MunicipioRepositoryH2.buscarMunicipioPorId(ConnectionDatabase.getConnection(), idMunicipio);
             municipioRepository.delete(municipio);
             JOptionPane.showMessageDialog(null, "Municipio Eliminado");
             limpiarTablaM();
@@ -261,7 +261,8 @@ public class GUI extends javax.swing.JFrame {
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Usuario no Seleccionado");
         } else {
-            Lugar lugar = LugarRepositoryH2.obtenerLugarPorDireccion(ConnectionDatabase.getConnection(), direccion);
+            Lugar lugar = LugarRepositoryH2.buscarLugarPorDireccion(ConnectionDatabase.getConnection(), direccion);
+            System.out.println(lugar.getDireccion());
             lugarRepository.delete(lugar);
             JOptionPane.showMessageDialog(null, "Lugar Eliminado");
             limpiarTablaL();
@@ -323,7 +324,7 @@ public class GUI extends javax.swing.JFrame {
         if (fila < 0) {
             JOptionPane.showMessageDialog(null,"Usuario no Seleccionado");
         } else {
-            Programa programa = ProgramaRepositoryH2.obtenerProgramaPorId(ConnectionDatabase.getConnection(), idPrograma);
+            Programa programa = ProgramaRepositoryH2.buscarProgramaPorId(ConnectionDatabase.getConnection(), idPrograma);
             programaRepository.delete(programa);
             JOptionPane.showMessageDialog(null, "Programa Eliminado");
             limpiarTablaP();
@@ -351,7 +352,7 @@ public class GUI extends javax.swing.JFrame {
         modeloE = (DefaultTableModel)tablaEstudiantes.getModel();
         // Llenar el modelo de tabla con los datos de los departamentos
         for (Estudiante estudiante : estudiantes) {
-            modeloE.addRow(new Object[]{estudiante.getId(),estudiante.getNombre(),estudiante.getApellido(),estudiante.getPrograma(),estudiante.getDireccion()});
+            modeloE.addRow(new Object[]{estudiante.getId(),estudiante.getNombre(),estudiante.getApellido(),estudiante.getPrograma().getNombre(),estudiante.getDireccion().getDireccion()});
         }
         tablaEstudiantes.setModel(modeloE);
     }
@@ -1436,12 +1437,10 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(comboDirecciones2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(panelEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ModificarEstudiante)
-                        .addComponent(AgregarEstudiante))
-                    .addGroup(panelEstudiantesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(EliminarEstudiante)
-                        .addComponent(NuevoEstudiante)))
+                    .addComponent(ModificarEstudiante)
+                    .addComponent(AgregarEstudiante)
+                    .addComponent(EliminarEstudiante)
+                    .addComponent(NuevoEstudiante))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(68, Short.MAX_VALUE))

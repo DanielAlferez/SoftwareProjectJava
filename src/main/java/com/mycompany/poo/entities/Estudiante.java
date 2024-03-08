@@ -9,9 +9,9 @@ package com.mycompany.poo.entities;
  * @author Estudiante_MCA
  */
 public class Estudiante {
+    private int id_estudiante;
     private String nombre;
     private String apellido;
-    private int id_estudiante;
     private double codigo;
     private Programa programa;
     private Lugar direccion;

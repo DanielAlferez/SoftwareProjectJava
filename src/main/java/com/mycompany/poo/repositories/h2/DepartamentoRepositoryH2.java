@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 
 public class DepartamentoRepositoryH2 implements IRepository<Departamento> {
 
-
     public DepartamentoRepositoryH2() {
     }
 
@@ -85,7 +84,7 @@ public class DepartamentoRepositoryH2 implements IRepository<Departamento> {
         }
     }  
     
-    public static Departamento obtenerDepartamentoPorId(Connection connection, int idDepartamento) {
+    public static Departamento buscarDepartamentoPorId(Connection connection, int idDepartamento) {
     String sql = "SELECT * FROM departamento WHERE id_departamento = ?";
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
         statement.setInt(1, idDepartamento);

@@ -122,13 +122,13 @@ public class MunicipiosCreados implements IVisualizarInformacion, IRepository<Mu
                 String linea = scanner.nextLine();
                 // Dividir la línea en partes para obtener el ID, nombre y ID del departamento del municipio
                 String[] partes = linea.split(",");
-                if (partes.length == 3) {
+                if (partes.length == 4) {
                     int idMunicipio = Integer.parseInt(partes[0].trim());
                     String nombre = partes[1].trim();
                     int departamentoId = Integer.parseInt(partes[2].trim());
 
                     // Obtener el objeto Departamento asociado al Municipio
-                    Departamento departamento = DepartamentosCreados.buscarDepartamentoPorId(departamentoId, fileName);
+                    Departamento departamento = DepartamentosCreados.buscarDepartamentoPorId(departamentoId, "Departamentos.txt");
 
                     // Construir el objeto Municipio y agregarlo a la lista
                     Municipio municipio = new Municipio(idMunicipio, nombre, departamento);
@@ -186,13 +186,13 @@ public class MunicipiosCreados implements IVisualizarInformacion, IRepository<Mu
                 String linea = scanner.nextLine();
                 // Dividir la línea en partes para obtener el ID, nombre y ID del departamento del municipio
                 String[] partes = linea.split(",");
-                if (partes.length == 3) {
+                if (partes.length == 4) {
                     int id = Integer.parseInt(partes[0].trim());
                     if (id == idBuscado) {
                         String nombre = partes[1].trim();
                         int idDepartamento = Integer.parseInt(partes[2].trim());
                         // Obtener el objeto Departamento asociado al municipio
-                        Departamento departamento = DepartamentosCreados.buscarDepartamentoPorId(idDepartamento, "departamentos.txt");
+                        Departamento departamento = DepartamentosCreados.buscarDepartamentoPorId(idDepartamento, "Departamentos.txt");
                         if (departamento != null) {
                             return new Municipio(id, nombre, departamento);
                         } else {

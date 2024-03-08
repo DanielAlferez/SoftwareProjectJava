@@ -139,19 +139,20 @@ public class EstudiantesInscritos implements IVisualizarInformacion, IRepository
                 String linea = scanner.nextLine();
                 // Dividir la línea en partes para obtener los atributos del estudiante
                 String[] partes = linea.split(",");
-                if (partes.length == 6) {
-                    int idEstudiante = Integer.parseInt(partes[0].trim());
-                    String nombre = partes[1].trim();
-                    String apellido = partes[2].trim();
+                if (partes.length == 12) {
+                    String nombre = partes[0].trim();
+                    String apellido = partes[1].trim();
+                    int idEstudiante = Integer.parseInt(partes[2].trim());
+
                     double codigo = Double.parseDouble(partes[3].trim());
                     int idPrograma = Integer.parseInt(partes[4].trim());
-                    String idDireccion = partes[5].trim();
+                    String idDireccion = partes[7].trim();
 
                     // Obtener el objeto Programa asociado al Estudiante
-                    Programa programa = ProgramasCreados.buscarProgramaPorId(idPrograma,fileName);
+                    Programa programa = ProgramasCreados.buscarProgramaPorId(idPrograma,"Programas.txt");
 
                     // Obtener el objeto Lugar asociado al Estudiante
-                    Lugar direccion = ListaLugares.buscarPorDireccion(idDireccion,fileName);
+                    Lugar direccion = ListaLugares.buscarLugarPorDireccion(idDireccion,"Lugares.txt");
 
                     // Construir el objeto Estudiante y agregarlo a la lista
                     Estudiante estudiante = new Estudiante(idEstudiante, nombre, apellido, codigo, programa, direccion);

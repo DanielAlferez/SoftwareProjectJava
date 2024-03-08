@@ -42,4 +42,8 @@ public class Lugar {
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
+
+    public Lugar get(String direccion) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

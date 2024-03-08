@@ -81,7 +81,7 @@ public class ProgramaRepositoryH2 implements IRepository<Programa>{
                 String direccion = resultSet.getString("direccion");
 
                 // Obtener el objeto Lugar asociado al Programa
-                Lugar lugar = LugarRepositoryH2.obtenerLugarPorDireccion(connection, direccion);
+                Lugar lugar = LugarRepositoryH2.buscarLugarPorDireccion(connection, direccion);
 
                 // Construir el objeto Programa y agregarlo a la lista
                 Programa programa = new Programa(idPrograma, nombre, semestre, lugar);
@@ -93,7 +93,7 @@ public class ProgramaRepositoryH2 implements IRepository<Programa>{
         return programas;
     }
     
-    public static Programa obtenerProgramaPorId(Connection connection, int idPrograma) {
+    public static Programa buscarProgramaPorId(Connection connection, int idPrograma) {
         String sql = "SELECT * FROM programa WHERE id_programa = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, idPrograma);
@@ -101,7 +101,7 @@ public class ProgramaRepositoryH2 implements IRepository<Programa>{
             if (resultSet.next()) {
                 String direccion = resultSet.getString("direccion");
                 // Obtener el objeto Lugar asociado al programa
-                Lugar lugar = LugarRepositoryH2.obtenerLugarPorDireccion(connection, direccion);
+                Lugar lugar = LugarRepositoryH2.buscarLugarPorDireccion(connection, direccion);
 
                 // Suponiendo que la clase Programa tiene un constructor apropiado
                 Programa programa = new Programa(resultSet.getInt("id_programa"), resultSet.getString("nombre"), resultSet.getInt("semestre"), lugar);
